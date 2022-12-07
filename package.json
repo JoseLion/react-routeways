@@ -34,19 +34,49 @@
     "test": "NODE_ENV=test mocha \"test/**/*.test.ts?(x)\""
   },
   "devDependencies": {
-    "@types/mocha": "^10.0.0",
-    "@types/node": "^18.11.9",
-    "@typescript-eslint/eslint-plugin": "^5.44.0",
-    "@typescript-eslint/parser": "^5.44.0",
-    "eslint": "^8.28.0",
+    "@stackbuilders/assertive-ts": "^1.2.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.4.3",
+    "@types/jsdom-global": "^3.0.4",
+    "@types/mocha": "^10.0.1",
+    "@types/node": "^18.11.11",
+    "@typescript-eslint/eslint-plugin": "^5.45.1",
+    "@typescript-eslint/parser": "^5.45.1",
+    "eslint": "^8.29.0",
     "eslint-plugin-import": "^2.26.0",
-    "eslint-plugin-jsdoc": "^39.6.2",
+    "eslint-plugin-jsdoc": "^39.6.4",
     "eslint-plugin-react": "^7.31.11",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "jsdom": "^20.0.3",
+    "jsdom-global": "^3.0.2",
     "mocha": "^10.1.0",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-router-dom": "^6.4.4",
     "ts-node": "^10.9.1",
+    "ts-routeways": "^1.4.4",
     "tslib": "^2.4.1",
     "typescript": "^4.9.3"
+  },
+  "peerDependencies": {
+    "react": ">=16.8.0",
+    "react-dom": ">=16.8.0",
+    "react-router-dom": ">=6.0.0",
+    "ts-routeways": ">=1.4.4"
+  },
+  "peerDependenciesMeta": {
+    "react": {
+      "optional": false
+    },
+    "react-dom": {
+      "optional": false
+    },
+    "react-router-dom": {
+      "optional": false
+    },
+    "ts-routeways": {
+      "optional": false
+    }
   },
   "packageManager": "yarn@3.3.0"
 }
