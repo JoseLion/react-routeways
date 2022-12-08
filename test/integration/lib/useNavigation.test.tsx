@@ -1,29 +1,27 @@
-import { renderHook, waitFor } from "@testing-library/react";
-import { ReactElement, useCallback } from "react";
 import { expect } from "@stackbuilders/assertive-ts";
+import { renderHook, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { ReactElement, useCallback } from "react";
 import { BrowserRouter } from "react-router-dom";
 
-import { createNavigator } from "../../../src/lib/createNavigator";
-import { TestRoutes } from "../../helpers/routes";
+import { useNavigation } from "../../../src/lib/useNavigation";
 import { renderWithRouter } from "../../helpers/renderWith";
-
-const useNavigator = createNavigator(TestRoutes);
+import { TestRoutes } from "../../helpers/routes";
 
 function NavComponent(): ReactElement {
-  const navigation = useNavigator();
+  const { navigate, reset } = useNavigation();
 
   const goHome = useCallback((): void => {
-    navigation.home.navigate();
-  }, [navigation]);
+    navigate(TestRoutes.home);
+  }, [navigate]);
 
   const goLib = useCallback((): void => {
-    navigation.library.navigate({ libId: 1 });
-  }, [navigation]);
+    navigate(TestRoutes.library, { libId: 1 });
+  }, [navigate]);
 
   const redirectAuthor = useCallback((): void => {
-    navigation.library.author.reset({ authorId: 1, libId: 1 });
-  }, [navigation]);
+    reset(TestRoutes.library.author, { authorId: 1, libId: 1 });
+  }, [reset]);
 
   return (
     <nav>
@@ -38,24 +36,13 @@ function NavComponent(): ReactElement {
   );
 }
 
-describe("[Integration] createNavigation.test.ts", () => {
-  context("when the created hook is used", () => {
-    it("returns a navigator with the passed route structure", () => {
-      const { result } = renderHook(useNavigator, { wrapper: BrowserRouter });
+describe("[Integration] useNavigation.test.tsx", () => {
+  it("creates a Navigation object", () => {
+    const { result } = renderHook(useNavigation, { wrapper: BrowserRouter });
 
-      const routes = [
-        result.current.home,
-        result.current.library,
-        result.current.library.author,
-        result.current.library.author.book,
-      ];
-
-      expect(routes).toSatisfyAll(route => {
-        expect(route).toContainAllKeys(["navigate", "reset"]);
-        expect(typeof route.navigate).toBeEqual("function");
-        expect(typeof route.reset).toBeEqual("function");
-      });
-    });
+    expect(result.current).toContainAllKeys(["navigate", "reset"]);
+    expect(typeof result.current.navigate).toBeEqual("function");
+    expect(typeof result.current.reset).toBeEqual("function");
   });
 
   context("when the navigate function is called", () => {
@@ -76,8 +63,8 @@ describe("[Integration] createNavigation.test.ts", () => {
     });
   });
 
-  context("when the replace function is called", () => {
-    it("resets the history with the route's location", async () => {
+  context("when the reset function is called", () => {
+    it("resets the history to the route's location", async () => {
       const { getByRole, findByText, queryByRole } = renderWithRouter(<NavComponent />);
 
       await waitFor(() => getByRole("heading", { level: 1, name: "Home" }));

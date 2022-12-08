@@ -1,3 +1,4 @@
+import { useCallback, useMemo } from "react";
 import { Codec, Routeway } from "ts-routeways";
 import { PathLike, RouteParams } from "ts-routeways/dist/lib/commons.types";
 
@@ -24,11 +25,11 @@ type NavigateMethods<
 > = keyof V extends never
       ? {
         navigate<S>(params?: RouteParams<V, Q>, options?: NavigateOptions<S>): void;
-        replace<S>(params?: RouteParams<V, Q>, options?: NavigateOptions<S>): void;
+        reset<S>(params?: RouteParams<V, Q>, options?: NavigateOptions<S>): void;
       }
       : {
         navigate<S>(params: RouteParams<V, Q>, options?: NavigateOptions<S>): void;
-        replace<S>(params: RouteParams<V, Q>, options?: NavigateOptions<S>): void;
+        reset<S>(params: RouteParams<V, Q>, options?: NavigateOptions<S>): void;
       };
 
 /**
@@ -43,8 +44,8 @@ export function createNavigator<T extends Record<string, Routeway>>(routes: T): 
   const useNavigator = (): NavigatorHook<T> => {
     const navigator = config.useNavigator();
 
-    const routesAsNavigator = <S extends Record<string, Routeway>>(routeMap: S): NavigatorHook<S> =>
-      safeKeys(routeMap).reduce((acc, key) => {
+    const routesAsNavigator = useCallback(<S extends Record<string, Routeway>>(routeMap: S): NavigatorHook<S> => {
+      return safeKeys(routeMap).reduce((acc, key) => {
         const route = routeMap[key];
 
         if (route !== undefined) {
@@ -64,7 +65,7 @@ export function createNavigator<T extends Record<string, Routeway>>(routes: T): 
 
                 navigator(route.makeUrl(params), { replace, state });
               },
-              replace(params, options = { }) {
+              reset(params, options = { }) {
                 const { state } = options;
                 const replace = true;
 
@@ -76,8 +77,11 @@ export function createNavigator<T extends Record<string, Routeway>>(routes: T): 
 
         return acc;
       }, { } as NavigatorHook<S>);
+    }, [navigator]);
 
-    return routesAsNavigator(routes);
+    return useMemo((): NavigatorHook<T> => {
+      return routesAsNavigator(routes);
+    }, [routesAsNavigator, routes]);
   };
 
   return useNavigator;
