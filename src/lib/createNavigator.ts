@@ -5,21 +5,19 @@ import { PathLike, RouteParams } from "ts-routeways/dist/lib/commons.types";
 import { config } from "./config/Config";
 import { safeKeys } from "./helpers/commons";
 
-type NavigatorHook<T extends Record<string, Routeway>> =
-  T extends Record<string, Routeway>
-    ? { [K in keyof T]: T[K] extends Routeway<PathLike, infer V, infer Q, infer S>
-          ? keyof S extends never
-            ? NavigateMethods<V, Q>
-            : NavigatorHook<S> & NavigateMethods<V, Q>
-          : never
-      }
-    : never;
+export type NavigatorHook<T extends Record<string, Routeway>> = {
+  [K in keyof T]: T[K] extends Routeway<PathLike, infer V, infer Q, infer S>
+    ? keyof S extends never
+      ? NavigateMethods<V, Q>
+      : NavigatorHook<S> & NavigateMethods<V, Q>
+    : never
+};
 
-interface NavigateOptions<S> {
+export interface NavigateOptions<S> {
   state?: S;
 }
 
-type NavigateMethods<
+export type NavigateMethods<
   V extends Record<string, Codec<unknown>>,
   Q extends Record<string, Codec<unknown>>,
 > = keyof V extends never
