@@ -28,10 +28,11 @@
   ],
   "scripts": {
     "build": "tsc -p tsconfig.prod.json",
-    "check": "yarn compile && yarn lint && yarn test --forbid-only",
+    "check": "yarn compile && yarn lint && yarn test --forbid-only && yarn test-d",
     "compile": "tsc",
     "lint": "eslint .",
-    "test": "NODE_ENV=test mocha \"test/**/*.test.ts?(x)\""
+    "test": "NODE_ENV=test mocha \"test/**/*.test.ts?(x)\"",
+    "test-d": "yarn build && tsd"
   },
   "devDependencies": {
     "@stackbuilders/assertive-ts": "^1.2.0",
@@ -56,6 +57,7 @@
     "react-router-dom": "^6.4.5",
     "ts-node": "^10.9.1",
     "ts-routeways": "^1.4.4",
+    "tsd": "^0.25.0",
     "tslib": "^2.4.1",
     "typescript": "^4.9.4"
   },
