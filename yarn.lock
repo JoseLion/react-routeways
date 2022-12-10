@@ -3643,7 +3643,7 @@ __metadata:
     react-dom: ^18.2.0
     react-router-dom: ^6.4.5
     ts-node: ^10.9.1
-    ts-routeways: ^1.4.4
+    ts-routeways: ^1.4.5
     tsd: ^0.25.0
     tslib: ^2.4.1
     typescript: ^4.9.4
@@ -3651,7 +3651,7 @@ __metadata:
     react: ">=16.8.0"
     react-dom: ">=16.8.0"
     react-router-dom: ">=6.0.0"
-    ts-routeways: ">=1.4.4"
+    ts-routeways: ">=1.4.5"
   peerDependenciesMeta:
     react:
       optional: false
@@ -4309,14 +4309,14 @@ __metadata:
   languageName: node
   linkType: hard
 
-"ts-routeways@npm:^1.4.4":
-  version: 1.4.4
-  resolution: "ts-routeways@npm:1.4.4"
+"ts-routeways@npm:^1.4.5":
+  version: 1.4.5
+  resolution: "ts-routeways@npm:1.4.5"
   dependencies:
     ts-pattern: ^4.0.6
   peerDependencies:
     react: ">=16.8.0"
-  checksum: 436457a101003bd57f5ef45d489dfb9a47d4fba30f26c5ba5f587e5082388b629bb9c5dbb1b81036e53b1ca2dae4cd23e440fa88236b47100694915a17d43870
+  checksum: e6bf4411a3bf19df755ccab445ddca47a3af1296cef5a37c93e98bda1407dd846cdd13f5818b80c88d577f0702bacd54735a8f4c91377ae50d3380a15534a137
   languageName: node
   linkType: hard
 
