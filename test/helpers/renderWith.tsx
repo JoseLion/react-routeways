@@ -8,6 +8,10 @@ interface TestScreenProps {
   title: string;
 }
 
+interface RenderOptions {
+  url?: string;
+}
+
 function TestScreen({ title }: TestScreenProps): ReactElement {
 
   return (
@@ -19,8 +23,9 @@ function TestScreen({ title }: TestScreenProps): ReactElement {
   );
 }
 
-export function renderWithRouter(Element: ReactElement): RenderResult {
-  window.history.replaceState({ }, "", TestRoutes.home.makeUrl());
+export function renderWithRouter(Element: ReactElement, options: RenderOptions = { }): RenderResult {
+  const url = options.url ?? TestRoutes.home.makeUrl();
+  window.history.replaceState({ }, "", url);
 
   return render(
     <BrowserRouter>

@@ -1,0 +1,15 @@
+/* eslint-disable react-hooks/rules-of-hooks */
+import { expectType, expectAssignable } from "tsd";
+
+import { useQueryParameters, UseQueryParameters } from "../../src/lib/useQueryParameters";
+import { TestRoutes } from "../../test/helpers/routes";
+
+expectType<UseQueryParameters<typeof TestRoutes.home>>(useQueryParameters(TestRoutes.home));
+expectType<UseQueryParameters<typeof TestRoutes.library>>(useQueryParameters(TestRoutes.library));
+expectType<UseQueryParameters<typeof TestRoutes.library.author>>(useQueryParameters(TestRoutes.library.author));
+
+expectAssignable<Record<never, never>>(useQueryParameters(TestRoutes.home)[0]);
+expectAssignable<(value: Record<never, never>) => void>(useQueryParameters(TestRoutes.library)[1]);
+
+expectAssignable<{ page?: number; search?: string; }>(useQueryParameters(TestRoutes.library)[0]);
+expectAssignable<(value: { page?: number; search?: string; }) => void>(useQueryParameters(TestRoutes.library)[1]);

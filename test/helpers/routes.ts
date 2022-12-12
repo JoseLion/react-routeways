@@ -6,6 +6,7 @@ export const TestRoutes = Routeways()
     name: "library",
     path: "/library/:libId",
     pathVars: { libId: Codecs.Number },
+    queryParams: { page: Codecs.Number, search: Codecs.String },
     subRoutes: Routeways()
       .nest({
         name: "author",
