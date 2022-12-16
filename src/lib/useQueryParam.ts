@@ -4,7 +4,7 @@ import { CodecMap, CodecsToRecord, PathLike, Routeway } from "ts-routeways";
 
 import { NonOptional, Optional } from "./helpers/commons";
 
-type UseQueryParam<T> = [T, Dispatch<SetStateAction<T>>];
+export type UseQueryParam<T> = [T, Dispatch<SetStateAction<T>>];
 
 type SetQueryParam<
   Q extends CodecMap,
