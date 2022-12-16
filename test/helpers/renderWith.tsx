@@ -23,7 +23,7 @@ function TestScreen({ title }: TestScreenProps): ReactElement {
   );
 }
 
-export function renderWithRouter(Element: ReactElement, options: RenderOptions = { }): RenderResult {
+export function renderWithNav(Element: ReactElement, options: RenderOptions = { }): RenderResult {
   const url = options.url ?? TestRoutes.home.makeUrl();
   window.history.replaceState({ }, "", url);
 
@@ -39,6 +39,19 @@ export function renderWithRouter(Element: ReactElement, options: RenderOptions =
             <Route path={TestRoutes.library.author.book.template()} element={<TestScreen title="Book" />} />
           </Route>
         </Route>
+      </Routes>
+    </BrowserRouter>
+  );
+}
+
+export function renderWithRouter(Element: ReactElement, options: RenderOptions = { }): RenderResult {
+  const url = options.url ?? TestRoutes.home.makeUrl();
+  window.history.replaceState({ }, "", url);
+
+  return render(
+    <BrowserRouter>
+      <Routes>
+        <Route path="*" element={Element} />
       </Routes>
     </BrowserRouter>
   );
