@@ -1,6 +1,5 @@
 import { useCallback, useMemo } from "react";
-import { Codec, Routeway } from "ts-routeways";
-import { PathLike, RouteParams } from "ts-routeways/dist/lib/commons.types";
+import { CodecMap, PathLike, RouteParams, Routeway } from "ts-routeways";
 
 import { config } from "./config/Config";
 import { safeKeys } from "./helpers/commons";
@@ -17,18 +16,16 @@ export interface NavigateOptions<S> {
   state?: S;
 }
 
-export type NavigateMethods<
-  V extends Record<string, Codec<unknown>>,
-  Q extends Record<string, Codec<unknown>>,
-> = keyof V extends never
-      ? {
-        navigate<S>(params?: RouteParams<V, Q>, options?: NavigateOptions<S>): void;
-        reset<S>(params?: RouteParams<V, Q>, options?: NavigateOptions<S>): void;
-      }
-      : {
-        navigate<S>(params: RouteParams<V, Q>, options?: NavigateOptions<S>): void;
-        reset<S>(params: RouteParams<V, Q>, options?: NavigateOptions<S>): void;
-      };
+export type NavigateMethods<V extends CodecMap, Q extends CodecMap> =
+  keyof V extends never
+    ? {
+      navigate<S>(params?: RouteParams<V, Q>, options?: NavigateOptions<S>): void;
+      reset<S>(params?: RouteParams<V, Q>, options?: NavigateOptions<S>): void;
+    }
+    : {
+      navigate<S>(params: RouteParams<V, Q>, options?: NavigateOptions<S>): void;
+      reset<S>(params: RouteParams<V, Q>, options?: NavigateOptions<S>): void;
+    };
 
 /**
  * Creates a hook that returns a "Navigator" of your custom routes. This

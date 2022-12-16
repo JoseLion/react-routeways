@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import { safeKeys } from "../../../src/lib/helpers/commons";
 import { useNavigation } from "../../../src/lib/useNavigation";
-import { renderWithRouter } from "../../helpers/renderWith";
+import { renderWithNav } from "../../helpers/renderWith";
 import { TestRoutes } from "../../helpers/routes";
 
 function NavComponent(): ReactElement {
@@ -51,7 +51,7 @@ describe("[Integration] useNavigation.test.tsx", () => {
 
   context("when the goTo function is called", () => {
     it("returns a callback that pushes another location to the history", async () => {
-      const { getByRole, findByText } = renderWithRouter(<NavComponent />);
+      const { getByRole, findByText } = renderWithNav(<NavComponent />);
 
       await waitFor(() => getByRole("heading", { level: 1, name: "Home" }));
 
@@ -69,7 +69,7 @@ describe("[Integration] useNavigation.test.tsx", () => {
 
   context("when the navigate function is called", () => {
     it("pushes another location to the history", async () => {
-      const { getByRole, findByText } = renderWithRouter(<NavComponent />);
+      const { getByRole, findByText } = renderWithNav(<NavComponent />);
 
       await waitFor(() => getByRole("heading", { level: 1, name: "Home" }));
 
@@ -87,7 +87,7 @@ describe("[Integration] useNavigation.test.tsx", () => {
 
   context("when the reset function is called", () => {
     it("resets the history to the route's location", async () => {
-      const { getByRole, findByText, queryByRole } = renderWithRouter(<NavComponent />);
+      const { getByRole, findByText, queryByRole } = renderWithNav(<NavComponent />);
 
       await waitFor(() => getByRole("heading", { level: 1, name: "Home" }));
 
@@ -107,7 +107,7 @@ describe("[Integration] useNavigation.test.tsx", () => {
 
   context("when the resetTo funciton is called", () => {
     it("returns a callback that resets the history to the route's location", async () => {
-      const { getByRole, findByText, queryByRole } = renderWithRouter(<NavComponent />);
+      const { getByRole, findByText, queryByRole } = renderWithNav(<NavComponent />);
 
       await waitFor(() => getByRole("heading", { level: 1, name: "Home" }));
 

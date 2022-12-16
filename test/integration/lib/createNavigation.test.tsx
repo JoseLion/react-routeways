@@ -6,7 +6,7 @@ import { BrowserRouter } from "react-router-dom";
 
 import { createNavigator } from "../../../src/lib/createNavigator";
 import { TestRoutes } from "../../helpers/routes";
-import { renderWithRouter } from "../../helpers/renderWith";
+import { renderWithNav } from "../../helpers/renderWith";
 
 const useNavigator = createNavigator(TestRoutes);
 
@@ -60,7 +60,7 @@ describe("[Integration] createNavigation.test.ts", () => {
 
   context("when the navigate function is called", () => {
     it("pushes another location to the history", async () => {
-      const { getByRole, findByText } = renderWithRouter(<NavComponent />);
+      const { getByRole, findByText } = renderWithNav(<NavComponent />);
 
       await waitFor(() => getByRole("heading", { level: 1, name: "Home" }));
 
@@ -78,7 +78,7 @@ describe("[Integration] createNavigation.test.ts", () => {
 
   context("when the replace function is called", () => {
     it("resets the history with the route's location", async () => {
-      const { getByRole, findByText, queryByRole } = renderWithRouter(<NavComponent />);
+      const { getByRole, findByText, queryByRole } = renderWithNav(<NavComponent />);
 
       await waitFor(() => getByRole("heading", { level: 1, name: "Home" }));
 
