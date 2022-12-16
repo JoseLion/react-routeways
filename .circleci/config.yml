@@ -77,10 +77,6 @@ jobs:
           name: Test
           command: yarn test --forbid-only
 
-      - run:
-          name: Test type definitions
-          command: yarn test-d
-
 workflows:
   main:
     jobs:
