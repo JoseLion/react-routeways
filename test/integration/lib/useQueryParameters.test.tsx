@@ -30,7 +30,10 @@ function Inner(): ReactElement {
   const [queryParams, setQueryParams] = useQueryParameters(TestRoutes.library);
 
   const changeParams = useCallback((): void => {
-    setQueryParams({ page: 1, search: "other" });
+    setQueryParams(({ page = 0 }) => ({
+      page: page - 2,
+      search: "other",
+    }));
   }, [setQueryParams]);
 
   return (

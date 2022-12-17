@@ -1,34 +1,46 @@
-import { useMemo } from "react";
-import { useLocation } from "react-router-dom";
+import { Dispatch, SetStateAction, useCallback, useMemo, useState } from "react";
+import { useLocation, useNavigate } from "react-router-dom";
 import { Routeway } from "ts-routeways";
 
-/**
- * Extracts the type of the path variables of a route.
- */
-export type PathVars<T extends Routeway> = ReturnType<T["parseUrl"]>["pathVars"];
+import { isFunctionAction } from "./helpers/commons";
+
+export type UsePathVars<V extends Record<string, unknown>> = [
+  V,
+  Dispatch<SetStateAction<V>>,
+];
 
 /**
- * Parses the path variables of the current location using the codecs of the
- * provided route.
+ * Returns a tuple of a stateful value of the path variables, and a
+ * function to update them. Just like the {@link useState} hook would.
  *
- * @example
- * ```
- * function EditUser(): ReactElement {
- *   const { userId } = usePathVars(MainRoutes.users.edit);
+ * However, because changing path variables means that current page may also be
+ * different, an update to the path variables will produce a navigate with the
+ * updated values.
  *
- *   return ...
- * }
- * ```
- *
- * @param route the route to use to parse the path vars
- * @returns the path variables of the current location
+ * @param route the `Routeway` route to use to parse the path variables
+ * @returns a stateful value of the path variables, and a function to update
+ *          them
  */
-export function usePathVars<T extends Routeway>(route: T): PathVars<T> {
-  const { hash, pathname, search } = useLocation();
+export function usePathVars<T extends Routeway>(route: T): UsePathVars<ReturnType<T["parseUrl"]>["pathVars"]> {
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  return useMemo((): PathVars<T> => {
-    const { pathVars } = route.parseUrl(`${pathname}${hash}${search}`);
+  const url = useMemo((): string => {
+    const { hash, pathname, search } = location;
+    return `${pathname}${hash}${search}`;
+  }, [location]);
 
-    return pathVars;
-  }, [hash, pathname, search]);
+  const [pathVars, setPathVars] = useState(() => route.parseUrl(url).pathVars);
+
+  const dispatch = useCallback((value: SetStateAction<ReturnType<T["parseUrl"]>["pathVars"]>): void => {
+    const { queryParams } = route.parseUrl(url);
+    const newPathVars = isFunctionAction(value)
+      ? value(pathVars)
+      : value;
+
+    setPathVars(newPathVars);
+    navigate(route.makeUrl({ ...newPathVars, ...queryParams }));
+  }, [url, pathVars]);
+
+  return [pathVars, dispatch];
 }

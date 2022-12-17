@@ -80,8 +80,5 @@
       "optional": false
     }
   },
-  "packageManager": "yarn@3.3.0",
-  "dependencies": {
-    "fast-equals": "^4.0.3"
-  }
+  "packageManager": "yarn@3.3.0"
 }

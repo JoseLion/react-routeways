@@ -38,7 +38,7 @@ function Inner(): ReactElement {
   const [page, setPage] = useQueryParam(TestRoutes.library, "page");
 
   const fistPage = useCallback((): void => {
-    setPage(1);
+    setPage((prev = 0) => prev - 2);
   }, [setPage]);
 
   return (
