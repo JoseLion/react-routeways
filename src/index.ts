@@ -7,8 +7,10 @@ export {
 
 export { useNavigation, Navigation } from "./lib/useNavigation";
 
-export { usePathVars, PathVars } from "./lib/usePathVars";
+export { usePathVars, UsePathVars as PathVars } from "./lib/usePathVars";
 
 export { useQueryParam, UseQueryParam } from "./lib/useQueryParam";
 
 export { useQueryParameters, UseQueryParameters } from "./lib/useQueryParameters";
+
+export { useRouteParams, UseRouteParams } from "./lib/useRouteParams";
