@@ -1,24 +1,24 @@
 export {
-  createNavigator,
+  createNavigatorHook,
   NavigateMethods,
   NavigateOptions,
   NavigatorHook,
-} from "./lib/createNavigator";
+} from "./lib/hooks/createNavigatorHook";
 
-export { useNavigation, Navigation } from "./lib/useNavigation";
+export { useNavigation, Navigation } from "./lib/hooks/useNavigation.hook";
 
-export { usePathVars, UsePathVars as PathVars } from "./lib/usePathVars";
+export { usePathVars, UsePathVars } from "./lib/hooks/usePathVars.hook";
 
-export { useQueryParam, UseQueryParam } from "./lib/useQueryParam";
+export { useQueryParam, UseQueryParam } from "./lib/hooks/useQueryParam.hook";
 
-export { useQueryParameters, UseQueryParameters } from "./lib/useQueryParameters";
+export { useQueryParameters, UseQueryParameters } from "./lib/hooks/useQueryParameters.hook";
 
-export { useRouteParams, UseRouteParams } from "./lib/useRouteParams";
+export { useRouteParams, UseRouteParams } from "./lib/hooks/useRouteParams.hook";
 
-export { Route, RouteProps } from "./lib/Route.component";
+export { Route, RouteProps } from "./lib/components/Route.component";
 
-export { Routes, RoutesProps } from "./lib/Routes.component";
+export { Routes, RoutesProps } from "./lib/components/Routes.component";
 
-export { Link, LinkProps } from "./lib/Link.component";
+export { Link, LinkProps } from "./lib/components/Link.component";
 
-export { NavLink, NavLinkProps } from "./lib/NavLink.component";
+export { NavLink, NavLinkProps } from "./lib/components/NavLink.component";
