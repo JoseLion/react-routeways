@@ -7,9 +7,11 @@ import { useQueryParam } from "../../../src/lib/useQueryParam";
 import { renderWithRouter } from "../../helpers/renderWith";
 import { TestRoutes } from "../../helpers/routes";
 
+const { library } = TestRoutes;
+
 function TestComp(): ReactElement {
-  const [page, setPage] = useQueryParam(TestRoutes.library, "page");
-  const [search, setSearch] = useQueryParam(TestRoutes.library, "search", "foo");
+  const [page, setPage] = useQueryParam(library, "page");
+  const [search, setSearch] = useQueryParam(library, "search", "foo");
 
   const changePage = useCallback((): void => {
     setPage(5);
@@ -35,7 +37,7 @@ function TestComp(): ReactElement {
 }
 
 function Inner(): ReactElement {
-  const [page, setPage] = useQueryParam(TestRoutes.library, "page");
+  const [page, setPage] = useQueryParam(library, "page");
 
   const fistPage = useCallback((): void => {
     setPage((prev = 0) => prev - 2);
@@ -54,7 +56,7 @@ describe("[Integration] useQueryParam.test.tsx", () => {
   context("when the query param state is used", () => {
     context("and the query param exists in the url", () => {
       it("parses the url to get the value", async () => {
-        const url = TestRoutes.library.makeUrl({ libId: 1, page: 3 });
+        const url = library.makeUrl({ libId: 1, page: 3 });
         const { getByRole } = renderWithRouter(<TestComp />, { url });
 
         await waitFor(() => getByRole("heading", { level: 1, name: "Page: 3" }));
@@ -64,7 +66,7 @@ describe("[Integration] useQueryParam.test.tsx", () => {
     context("and the query param does not exist in the url", () => {
       context("and a fallback is not provided", () => {
         it("leaves the value as undefined", async () => {
-          const url = TestRoutes.library.makeUrl({ libId: 1 });
+          const url = library.makeUrl({ libId: 1 });
           const { getByRole } = renderWithRouter(<TestComp />, { url });
 
           await waitFor(() => getByRole("heading", { level: 1, name: "Page: undefined" }));
@@ -73,7 +75,7 @@ describe("[Integration] useQueryParam.test.tsx", () => {
 
       context("and a fallback is provided", () => {
         it("initilizes the value with the fallback", async () => {
-          const url = TestRoutes.library.makeUrl({ libId: 1 });
+          const url = library.makeUrl({ libId: 1 });
           const { getByRole } = renderWithRouter(<TestComp />, { url });
 
           await waitFor(() => getByRole("heading", { level: 1, name: "Search: foo" }));
@@ -84,7 +86,7 @@ describe("[Integration] useQueryParam.test.tsx", () => {
 
   context("when the query param is changed", () => {
     it("updates all query param states and the url", async () => {
-      const url = TestRoutes.library.makeUrl({ libId: 1, page: 3 });
+      const url = library.makeUrl({ libId: 1, page: 3 });
       const { getByRole } = renderWithRouter(<TestComp />, { url });
 
       await waitFor(() => {
@@ -115,7 +117,7 @@ describe("[Integration] useQueryParam.test.tsx", () => {
 
   context("when the query param is changed from an inner component", () => {
     it("updates all query param states and the url", async () => {
-      const url = TestRoutes.library.makeUrl({ libId: 1, page: 3 });
+      const url = library.makeUrl({ libId: 1, page: 3 });
       const { getByRole } = renderWithRouter(<TestComp />, { url });
 
       await waitFor(() => {

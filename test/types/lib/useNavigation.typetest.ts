@@ -5,49 +5,51 @@ import { expectTypeOf } from "expect-type";
 import { useNavigation } from "../../../src/lib/useNavigation";
 import { TestRoutes } from "../../helpers/routes";
 
+const { home, library } = TestRoutes;
+
 const { goTo, navigate, reset, resetTo } = useNavigation();
 
-expectTypeOf(goTo(TestRoutes.home)).toEqualTypeOf<() => void>();
-expectTypeOf(goTo(TestRoutes.library, { libId: 1 })).toEqualTypeOf<() => void>();
-expectTypeOf(goTo(TestRoutes.library.author, { authorId: 1, libId: 1 })).toEqualTypeOf<() => void>();
-expectTypeOf(goTo(TestRoutes.library.author.book, { authorId: 1, bookId: 1, libId: 1 })).toEqualTypeOf<() => void>();
+expectTypeOf(goTo(home)).toEqualTypeOf<() => void>();
+expectTypeOf(goTo(library, { libId: 1 })).toEqualTypeOf<() => void>();
+expectTypeOf(goTo(library.author, { authorId: 1, libId: 1 })).toEqualTypeOf<() => void>();
+expectTypeOf(goTo(library.author.book, { authorId: 1, bookId: 1, libId: 1 })).toEqualTypeOf<() => void>();
 // @ts-expect-error
-expectTypeOf(goTo(TestRoutes.library)).toEqualTypeOf<() => void>();
+expectTypeOf(goTo(library)).toEqualTypeOf<() => void>();
 // @ts-expect-error
-expectTypeOf(goTo(TestRoutes.library.author, { libId: 1 })).toEqualTypeOf<() => void>();
+expectTypeOf(goTo(library.author, { libId: 1 })).toEqualTypeOf<() => void>();
 // @ts-expect-error
-expectTypeOf(goTo(TestRoutes.library.author.book, { authorId: 1, libId: 1 })).toEqualTypeOf<() => void>();
+expectTypeOf(goTo(library.author.book, { authorId: 1, libId: 1 })).toEqualTypeOf<() => void>();
 
-expectTypeOf(navigate(TestRoutes.home)).toBeVoid();
-expectTypeOf(navigate(TestRoutes.library, { libId: 1 })).toBeVoid();
-expectTypeOf(navigate(TestRoutes.library.author, { authorId: 1, libId: 1 })).toBeVoid();
-expectTypeOf(navigate(TestRoutes.library.author.book, { authorId: 1, bookId: 1, libId: 1 })).toBeVoid();
+expectTypeOf(navigate(home)).toBeVoid();
+expectTypeOf(navigate(library, { libId: 1 })).toBeVoid();
+expectTypeOf(navigate(library.author, { authorId: 1, libId: 1 })).toBeVoid();
+expectTypeOf(navigate(library.author.book, { authorId: 1, bookId: 1, libId: 1 })).toBeVoid();
 // @ts-expect-error
-expectTypeOf(navigate(TestRoutes.library)).toBeVoid();
+expectTypeOf(navigate(library)).toBeVoid();
 // @ts-expect-error
-expectTypeOf(navigate(TestRoutes.library.author, { libId: 1 })).toBeVoid();
+expectTypeOf(navigate(library.author, { libId: 1 })).toBeVoid();
 // @ts-expect-error
-expectTypeOf(navigate(TestRoutes.library.author.book, { authorId: 1, libId: 1 })).toBeVoid();
+expectTypeOf(navigate(library.author.book, { authorId: 1, libId: 1 })).toBeVoid();
 
-expectTypeOf(reset(TestRoutes.home)).toBeVoid();
-expectTypeOf(reset(TestRoutes.library, { libId: 1 })).toBeVoid();
-expectTypeOf(reset(TestRoutes.library.author, { authorId: 1, libId: 1 })).toBeVoid();
-expectTypeOf(reset(TestRoutes.library.author.book, { authorId: 1, bookId: 1, libId: 1 })).toBeVoid();
+expectTypeOf(reset(home)).toBeVoid();
+expectTypeOf(reset(library, { libId: 1 })).toBeVoid();
+expectTypeOf(reset(library.author, { authorId: 1, libId: 1 })).toBeVoid();
+expectTypeOf(reset(library.author.book, { authorId: 1, bookId: 1, libId: 1 })).toBeVoid();
 // @ts-expect-error
-expectTypeOf(reset(TestRoutes.library)).toBeVoid();
+expectTypeOf(reset(library)).toBeVoid();
 // @ts-expect-error
-expectTypeOf(reset(TestRoutes.library.author, { libId: 1 })).toBeVoid();
+expectTypeOf(reset(library.author, { libId: 1 })).toBeVoid();
 // @ts-expect-error
-expectTypeOf(reset(TestRoutes.library.author.book, { authorId: 1, libId: 1 })).toBeVoid();
+expectTypeOf(reset(library.author.book, { authorId: 1, libId: 1 })).toBeVoid();
 
-expectTypeOf(resetTo(TestRoutes.home)).toEqualTypeOf<() => void>();
-expectTypeOf(resetTo(TestRoutes.library, { libId: 1 })).toEqualTypeOf<() => void>();
-expectTypeOf(resetTo(TestRoutes.library.author, { authorId: 1, libId: 1 })).toEqualTypeOf<() => void>();
-expectTypeOf(resetTo(TestRoutes.library.author.book, { authorId: 1, bookId: 1, libId: 1 })).toEqualTypeOf<() => void>();
+expectTypeOf(resetTo(home)).toEqualTypeOf<() => void>();
+expectTypeOf(resetTo(library, { libId: 1 })).toEqualTypeOf<() => void>();
+expectTypeOf(resetTo(library.author, { authorId: 1, libId: 1 })).toEqualTypeOf<() => void>();
+expectTypeOf(resetTo(library.author.book, { authorId: 1, bookId: 1, libId: 1 })).toEqualTypeOf<() => void>();
 // @ts-expect-error
-expectTypeOf(resetTo(TestRoutes.library)).toEqualTypeOf<() => void>();
+expectTypeOf(resetTo(library)).toEqualTypeOf<() => void>();
 // @ts-expect-error
-expectTypeOf(resetTo(TestRoutes.library.author, { libId: 1 })).toEqualTypeOf<() => void>();
+expectTypeOf(resetTo(library.author, { libId: 1 })).toEqualTypeOf<() => void>();
 // @ts-expect-error
-expectTypeOf(resetTo(TestRoutes.library.author.book, { authorId: 1, libId: 1 })).toEqualTypeOf<() => void>();
+expectTypeOf(resetTo(library.author.book, { authorId: 1, libId: 1 })).toEqualTypeOf<() => void>();
 

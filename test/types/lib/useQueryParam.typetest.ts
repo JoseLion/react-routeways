@@ -6,16 +6,18 @@ import { Optional } from "../../../src/lib/helpers/commons";
 import { UseQueryParam, useQueryParam } from "../../../src/lib/useQueryParam";
 import { TestRoutes } from "../../helpers/routes";
 
-expectTypeOf(useQueryParam(TestRoutes.home, "foo")).toEqualTypeOf<UseQueryParam<Optional<unknown>>>();
+const { home, library } = TestRoutes;
 
-expectTypeOf(useQueryParam(TestRoutes.library, "page")).toEqualTypeOf<UseQueryParam<Optional<number>>>();
-expectTypeOf(useQueryParam(TestRoutes.library, "search")).toEqualTypeOf<UseQueryParam<Optional<string>>>();
+expectTypeOf(useQueryParam(home, "foo")).toEqualTypeOf<UseQueryParam<Optional<unknown>>>();
 
-expectTypeOf(useQueryParam(TestRoutes.library, "page", 1)).toEqualTypeOf<UseQueryParam<number>>();
-expectTypeOf(useQueryParam(TestRoutes.library, "search", "foo")).toEqualTypeOf<UseQueryParam<string>>();
+expectTypeOf(useQueryParam(library, "page")).toEqualTypeOf<UseQueryParam<Optional<number>>>();
+expectTypeOf(useQueryParam(library, "search")).toEqualTypeOf<UseQueryParam<Optional<string>>>();
+
+expectTypeOf(useQueryParam(library, "page", 1)).toEqualTypeOf<UseQueryParam<number>>();
+expectTypeOf(useQueryParam(library, "search", "foo")).toEqualTypeOf<UseQueryParam<string>>();
 
 // @ts-expect-error
-expectTypeOf(useQueryParam(TestRoutes.library, "foo")).toEqualTypeOf<UseQueryParam<Optional<unknown>>>();
+expectTypeOf(useQueryParam(library, "foo")).toEqualTypeOf<UseQueryParam<Optional<unknown>>>();
 
 // @ts-expect-error
-expectTypeOf(useQueryParam(TestRoutes.library, "search", 1)).toEqualTypeOf<UseQueryParam<number>>();
+expectTypeOf(useQueryParam(library, "search", 1)).toEqualTypeOf<UseQueryParam<number>>();

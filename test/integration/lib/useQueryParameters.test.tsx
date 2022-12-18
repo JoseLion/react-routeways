@@ -7,8 +7,10 @@ import { useQueryParameters } from "../../../src/lib/useQueryParameters";
 import { renderWithRouter } from "../../helpers/renderWith";
 import { TestRoutes } from "../../helpers/routes";
 
+const { library } = TestRoutes;
+
 function TestComp(): ReactElement {
-  const [queryParams, setQueryParams] = useQueryParameters(TestRoutes.library);
+  const [queryParams, setQueryParams] = useQueryParameters(library);
 
   const changeParam = useCallback((): void => {
     setQueryParams({ page: 5, search: "bar" });
@@ -27,7 +29,7 @@ function TestComp(): ReactElement {
 }
 
 function Inner(): ReactElement {
-  const [queryParams, setQueryParams] = useQueryParameters(TestRoutes.library);
+  const [queryParams, setQueryParams] = useQueryParameters(library);
 
   const changeParams = useCallback((): void => {
     setQueryParams(({ page = 0 }) => ({
@@ -49,7 +51,7 @@ function Inner(): ReactElement {
 describe("[Integration] useQueryParameters.test.tsx", () => {
   context("when the query params state is used", () => {
     it("parses the url to get the values", async () => {
-      const url = TestRoutes.library.makeUrl({ libId: 1, page: 3, search: "foo" });
+      const url = library.makeUrl({ libId: 1, page: 3, search: "foo" });
       const { getByRole } = renderWithRouter(<TestComp />, { url });
 
       await waitFor(() => {
@@ -61,7 +63,7 @@ describe("[Integration] useQueryParameters.test.tsx", () => {
 
   context("when the query params are changed", () => {
     it("updates all states and the url", async () => {
-      const url = TestRoutes.library.makeUrl({ libId: 1, page: 3, search: "foo" });
+      const url = library.makeUrl({ libId: 1, page: 3, search: "foo" });
       const { getByRole } = renderWithRouter(<TestComp />, { url });
 
       await waitFor(() => {
@@ -88,7 +90,7 @@ describe("[Integration] useQueryParameters.test.tsx", () => {
 
   context("when the query params are update from an inner component", () => {
     it("updates all states and the url", async () => {
-      const url = TestRoutes.library.makeUrl({ libId: 1, page: 3, search: "foo" });
+      const url = library.makeUrl({ libId: 1, page: 3, search: "foo" });
       const { getByRole } = renderWithRouter(<TestComp />, { url });
 
       await waitFor(() => {
