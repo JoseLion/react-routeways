@@ -36,8 +36,11 @@ export const Routes = new Proxy(OriginalRoutes, {
         && "route" in child.props;
 
       if (isRouteChild) {
-        const { route, ...rest } = child.props as RouteProps;
-        return <OriginalRoute {...rest} path={route?.template()} />;
+        const { catchAll = false, route, ...rest } = child.props as RouteProps;
+        const splat = catchAll ? "/*" : "";
+        const path = route === "*" ? route : route?.template().concat(splat);
+
+        return <OriginalRoute {...rest} path={path} />;
       }
 
       return child;
