@@ -1,5 +1,5 @@
 import { render, RenderResult } from "@testing-library/react";
-import { ReactElement } from "react";
+import { ReactElement, ReactNode } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import { TestRoutes } from "./routes";
@@ -9,6 +9,7 @@ interface TestScreenProps {
 }
 
 interface RenderOptions {
+  NotFound?: ReactNode;
   url?: string;
 }
 
@@ -34,6 +35,8 @@ export function renderWithNav(Element: ReactElement, options: RenderOptions = { 
       {Element}
 
       <Routes>
+        <Route path="*" element={options.NotFound ?? <TestScreen title="404" />} />
+
         <Route path={home.template()} element={<TestScreen title="Home" />} />
 
         <Route path={library.template()} element={<TestScreen title="Library" />}>
