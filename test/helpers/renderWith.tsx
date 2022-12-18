@@ -12,7 +12,9 @@ interface RenderOptions {
   url?: string;
 }
 
-function TestScreen({ title }: TestScreenProps): ReactElement {
+const { home, library } = TestRoutes;
+
+export function TestScreen({ title }: TestScreenProps): ReactElement {
 
   return (
     <div>
@@ -24,7 +26,7 @@ function TestScreen({ title }: TestScreenProps): ReactElement {
 }
 
 export function renderWithNav(Element: ReactElement, options: RenderOptions = { }): RenderResult {
-  const url = options.url ?? TestRoutes.home.makeUrl();
+  const url = options.url ?? home.makeUrl();
   window.history.replaceState({ }, "", url);
 
   return render(
@@ -32,11 +34,11 @@ export function renderWithNav(Element: ReactElement, options: RenderOptions = { 
       {Element}
 
       <Routes>
-        <Route path={TestRoutes.home.template()} element={<TestScreen title="Home" />} />
+        <Route path={home.template()} element={<TestScreen title="Home" />} />
 
-        <Route path={TestRoutes.library.template()} element={<TestScreen title="Library" />}>
+        <Route path={library.template()} element={<TestScreen title="Library" />}>
           <Route path={"/library/:libId/author/:authorId"} element={<TestScreen title="Author" />}>
-            <Route path={TestRoutes.library.author.book.template()} element={<TestScreen title="Book" />} />
+            <Route path={library.author.book.template()} element={<TestScreen title="Book" />} />
           </Route>
         </Route>
       </Routes>
@@ -45,7 +47,7 @@ export function renderWithNav(Element: ReactElement, options: RenderOptions = { 
 }
 
 export function renderWithRouter(Element: ReactElement, options: RenderOptions = { }): RenderResult {
-  const url = options.url ?? TestRoutes.home.makeUrl();
+  const url = options.url ?? home.makeUrl();
   window.history.replaceState({ }, "", url);
 
   return render(

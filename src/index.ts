@@ -14,3 +14,7 @@ export { useQueryParam, UseQueryParam } from "./lib/useQueryParam";
 export { useQueryParameters, UseQueryParameters } from "./lib/useQueryParameters";
 
 export { useRouteParams, UseRouteParams } from "./lib/useRouteParams";
+
+export { Route, RouteProps } from "./lib/Route.component";
+
+export { Routes, RoutesProps } from "./lib/Routes.component";

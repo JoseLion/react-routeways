@@ -9,19 +9,21 @@ import { useNavigation } from "../../../src/lib/useNavigation";
 import { renderWithNav } from "../../helpers/renderWith";
 import { TestRoutes } from "../../helpers/routes";
 
+const { home, library } = TestRoutes;
+
 function NavComponent(): ReactElement {
   const { goTo, navigate, reset, resetTo } = useNavigation();
 
   const goHome = useCallback((): void => {
-    navigate(TestRoutes.home);
+    navigate(home);
   }, [navigate]);
 
   const goLib = useCallback((): void => {
-    navigate(TestRoutes.library, { libId: 1 });
+    navigate(library, { libId: 1 });
   }, [navigate]);
 
   const redirectAuthor = useCallback((): void => {
-    reset(TestRoutes.library.author, { authorId: 1, libId: 1 });
+    reset(library.author, { authorId: 1, libId: 1 });
   }, [reset]);
 
   return (
@@ -29,9 +31,9 @@ function NavComponent(): ReactElement {
       <ul>
         <li onClick={goHome}>{"Go Home"}</li>
         <li onClick={goLib}>{"Go Library"}</li>
-        <li onClick={goTo(TestRoutes.library.author, { authorId: 1, libId: 1 })}>{"Go Author"}</li>
+        <li onClick={goTo(library.author, { authorId: 1, libId: 1 })}>{"Go Author"}</li>
         <li onClick={redirectAuthor}>{"Redirect Author"}</li>
-        <li onClick={resetTo(TestRoutes.library.author.book, { authorId: 1, bookId: 1, libId: 1 })}>
+        <li onClick={resetTo(library.author.book, { authorId: 1, bookId: 1, libId: 1 })}>
           {"Reset Book"}
         </li>
       </ul>

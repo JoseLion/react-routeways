@@ -5,14 +5,16 @@ import { expectTypeOf } from "expect-type";
 import { useQueryParameters, UseQueryParameters } from "../../../src/lib/useQueryParameters";
 import { TestRoutes } from "../../helpers/routes";
 
-expectTypeOf(useQueryParameters(TestRoutes.home)).toEqualTypeOf<UseQueryParameters<Record<never, never>>>();
-expectTypeOf(useQueryParameters(TestRoutes.library)).toEqualTypeOf<UseQueryParameters<{
+const { home, library } = TestRoutes;
+
+expectTypeOf(useQueryParameters(home)).toEqualTypeOf<UseQueryParameters<Record<never, never>>>();
+expectTypeOf(useQueryParameters(library)).toEqualTypeOf<UseQueryParameters<{
   page?: number;
   search?: string;
 }>>();
 
 // @ts-expect-error
-expectTypeOf(useQueryParameters(TestRoutes.library)).toEqualTypeOf<UseQueryParameters<{
+expectTypeOf(useQueryParameters(library)).toEqualTypeOf<UseQueryParameters<{
   foo?: boolean;
   other?: string;
 }>>();
