@@ -18,3 +18,7 @@ export { useRouteParams, UseRouteParams } from "./lib/useRouteParams";
 export { Route, RouteProps } from "./lib/Route.component";
 
 export { Routes, RoutesProps } from "./lib/Routes.component";
+
+export { Link, LinkProps } from "./lib/Link.component";
+
+export { NavLink, NavLinkProps } from "./lib/NavLink.component";
