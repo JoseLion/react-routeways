@@ -32,10 +32,10 @@ export function useQueryParam<Q extends CodecMap, K extends Extract<keyof Q, str
  * Returns a tuple of a stateful value of the specified query param, and a
  * function to update it. Just like the {@link useState} hook would.
  *
- * However, because the source of truth for this state is the current url,
+ * However, because the source of truth for this state is the current location,
  * whenever the state is updated in one component, it will be also updated in
  * other components using the same query param state. This keeps consistency
- * across the state and the URL all the time.
+ * across the state and the location all the time.
  *
  * @param route the `Routeway` route to use to parse the query param
  * @param key the key of the specific query param to use

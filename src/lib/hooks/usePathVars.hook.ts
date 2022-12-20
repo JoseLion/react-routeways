@@ -13,9 +13,9 @@ export type UsePathVars<V extends Record<string, unknown>> = [
  * Returns a tuple of a stateful value of the path variables, and a
  * function to update them. Just like the {@link useState} hook would.
  *
- * However, because changing path variables means that current page may also be
- * different, an update to the path variables will produce a navigate with the
- * updated values.
+ * However, because changing path variables means that the current location may
+ * also be different, an update to the path variables will produce a navigate
+ * using the updated values.
  *
  * @param route the `Routeway` route to use to parse the path variables
  * @returns a stateful value of the path variables, and a function to update

@@ -110,10 +110,10 @@ export interface Navigation {
 }
 
 /**
- * React hook which returns a `Navigation` object that contains navigations
- * functions that can be used with Routeways routes.
+ * Returns an object which contains navigation functions that can be used along
+ * with `Routeways` routes.
  *
- * @returns a `Navigation` object
+ * @returns an object with navigation functions
  */
 export function useNavigation(): Navigation {
   const navigator = useNavigate();

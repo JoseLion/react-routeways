@@ -17,7 +17,7 @@ export type UseRouteParams<T extends Record<string, unknown>> = [
  * hook would.
  *
  * This hook uses both {@link usePathVars} and {@link useQueryParameters}, so
- * updating the parameters may have the same effects in both hooks.
+ * updating parameters may have the same effects as in both hooks.
  *
  * @param route the `Routeway` route to use to parse the path variables and
  *              query parameters
