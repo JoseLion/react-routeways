@@ -23,7 +23,7 @@ export interface RouteProps extends Omit<PathRouteProps, "path"> {
 }
 
 /**
- * Same as react-router-dom's `Route` component, but it replaces the `path`
+ * Same as react-router-dom's `<Route>` component, but it replaces the `path`
  * prop with `route`, where you can pass as {@link Routeway} route which will
  * be used to create the path.
  */

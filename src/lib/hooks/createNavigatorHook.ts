@@ -28,8 +28,9 @@ export type NavigateMethods<V extends CodecMap, Q extends CodecMap> =
     };
 
 /**
- * Creates a hook that returns a "Navigator" of your custom routes. This
- * provides a more natural experience when imperative navigation is required.
+ * Creates a hook that returns a "Navigator" obeject from your custom routes.
+ * This provides natural experience of imperative navigation based on your
+ * routes structure.
  *
  * @param routes the custom `Routeways` routes
  * @param getNavigate a function or hook that provideds a navigation function

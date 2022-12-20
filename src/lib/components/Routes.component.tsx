@@ -22,7 +22,7 @@ export interface RoutesProps extends OriginalRoutesProps {
 }
 
 /**
- * A "wrapper" over react-router-dom's `Routes` component which allows the use
+ * A "wrapper" over react-router-dom's `<Routes>` component which allows the use
  * of react-routeways' {@link Route} components as children.
  */
 export const Routes = new Proxy(OriginalRoutes, {
