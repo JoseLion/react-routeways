@@ -1,7 +1,7 @@
 {
   "name": "react-routeways",
   "version": "0.0.0",
-  "description": "Hooks and helpers to use ts-routeways on React",
+  "description": "Use ts-routeways and react-router-dom together",
   "repository": "git@github.com:JoseLion/react-routeways.git",
   "homepage": "https://joselion.github.io/react-routeways/",
   "bugs": "https://github.com/JoseLion/react-routeways/issues",

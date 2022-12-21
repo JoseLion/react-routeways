@@ -1,6 +1,6 @@
 # React Routeways
 
-To be clear, this is not another React routing library. Instead, it's a complete abstraction to use [ts-routeways](https://github.com/JoseLion/ts-routeways) together with [react-router-dom](https://reactrouter.com/), providing all the type safety, url parsing/generation, and codecs definition of `ts-routeways` to the your `react-router-dom` routes, hooks, and components.
+This is not another React routing library. Instead, it's a complete abstraction to use [ts-routeways](https://github.com/JoseLion/ts-routeways) together with [react-router-dom](https://reactrouter.com/), providing all the type safety, url parsing/generation, and codecs definition of `ts-routeways` to the your `react-router-dom` routes, hooks, and components.
 
 ## Install
 
