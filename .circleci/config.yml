@@ -14,6 +14,7 @@ commands:
       nodejs:
         description: The NodeJS version to install
         type: string
+        default: ""
 
     steps:
       - checkout:
@@ -27,13 +28,16 @@ commands:
             echo '[ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh" --install' >> $BASH_ENV
             source $BASH_ENV
 
-      - run:
-          name: Install NodeJS v<< parameters.nodejs >>
-          command: |
-            nvm install << parameters.nodejs >>
-            nvm use << parameters.nodejs >>
-            nvm alias default << parameters.nodejs >>
-            node --version
+      - when:
+          condition: << parameters.nodejs >>
+          steps:
+            - run:
+                name: Install NodeJS v<< parameters.nodejs >>
+                command: |
+                  nvm install << parameters.nodejs >>
+                  nvm use << parameters.nodejs >>
+                  nvm alias default << parameters.nodejs >>
+                  node --version
 
       - run:
           name: Install yarn
@@ -77,6 +81,21 @@ jobs:
           name: Test
           command: yarn test --forbid-only
 
+  release:
+    working_directory: ~/repos/react-routeways
+    executor: basic
+
+    steps:
+      - bootstrap
+
+      - run:
+          name: Build
+          command: yarn build
+
+      - run:
+          name: Release
+          command: yarn release
+
 workflows:
   main:
     jobs:
@@ -84,5 +103,12 @@ workflows:
           matrix:
             parameters:
               nodejs: ["16", "17", "18", "19"]
+
+      - release:
+          requires:
+            - build
+          filters:
+            branches:
+              only: release
 
 ...
