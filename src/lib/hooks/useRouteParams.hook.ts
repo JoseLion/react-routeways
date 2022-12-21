@@ -13,7 +13,7 @@ export type UseRouteParams<T extends Record<string, unknown>> = [
 
 /**
  * Returns a tuple of a stateful value of both the path variables and query
- * parameters, and a function to update them. Just like the {@link useState}
+ * parameters, and a function to update them. Just like the {@link https://beta.reactjs.org/apis/react/useState useState}
  * hook would.
  *
  * This hook uses both {@link usePathVars} and {@link useQueryParameters}, so

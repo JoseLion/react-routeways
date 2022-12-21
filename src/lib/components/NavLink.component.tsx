@@ -2,14 +2,14 @@ import { ReactElement, useMemo } from "react";
 import { CodecMap, PathLike, Routeway } from "ts-routeways";
 import { NavLink as OriginalNavLink, NavLinkProps as OriginalNavLinkProps } from "react-router-dom";
 
-interface BaseNavLinkProps<T extends Routeway> {
+export interface BaseNavLinkProps<T extends Routeway> {
   /**
-   * The {@link Routeway} route to navigate to.
+   * The `Routeway` route to navigate to.
    */
   to: T;
 }
 
-type ParamNavLinkProps<T extends Routeway> =
+export type ParamNavLinkProps<T extends Routeway> =
   T extends Routeway<PathLike, infer V, CodecMap>
     ? keyof V extends never
       ? {
@@ -34,7 +34,7 @@ export type NavLinkProps<T extends Routeway> =
 
 /**
  * A wrapper over react-router-dom's `<NavLink>` component, with the difference
- * that the `to` prop expects a {@link Routeway} route instead of a path string.
+ * that the `to` prop expects a `Routeway` route instead of a path string.
  *
  * If the route requires path variables and/or query parameters, you can pass
  * them over the `params` prop.

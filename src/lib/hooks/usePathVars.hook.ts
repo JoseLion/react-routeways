@@ -11,7 +11,8 @@ export type UsePathVars<V extends Record<string, unknown>> = [
 
 /**
  * Returns a tuple of a stateful value of the path variables, and a
- * function to update them. Just like the {@link useState} hook would.
+ * function to update them. Just like the {@link https://beta.reactjs.org/apis/react/useState useState}
+ * hook would.
  *
  * However, because changing path variables means that the current location may
  * also be different, an update to the path variables will produce a navigate
