@@ -43,6 +43,8 @@ React Routeways is basically a set of React hooks and components which you can u
   - [useQueryParameters](#usequeryparameters)
   - [useRouteParams](#userouteparams)
 
+You can also check the [📚 API Reference](https://JoseLion.github.io/react-routeways/docs/build/) for more details and type definitions on each of the above.
+
 ### Components
 
 This set of components are mostly `react-router-dom` replacement drop-in components. The main difference is that wherever those components required a prop with a url/path string, now the will require a `ts-routeways` route instead.

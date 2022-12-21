@@ -13,7 +13,8 @@ const eventType = "setQueryParameters";
 
 /**
  * Returns a tuple of a stateful value of all query parameters, and a
- * function to update them. Just like the {@link useState} hook would.
+ * function to update them. Just like the {@link https://beta.reactjs.org/apis/react/useState useState}
+ * hook would.
  *
  * However, because the source of truth for this state is the current location,
  * whenever the state is updated in one component, it will be also updated in

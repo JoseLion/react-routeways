@@ -2,14 +2,14 @@ import { ReactElement, useMemo } from "react";
 import { Link as OriginalLink, LinkProps as OriginalLinkProps } from "react-router-dom";
 import { CodecMap, PathLike, Routeway } from "ts-routeways";
 
-interface BaseLinkProps<T extends Routeway> {
+export interface BaseLinkProps<T extends Routeway> {
   /**
-   * The {@link Routeway} route to navigate to.
+   * The `Routeway` route to navigate to.
    */
   to: T;
 }
 
-type ParamLinkProps<T extends Routeway> =
+export type ParamLinkProps<T extends Routeway> =
   T extends Routeway<PathLike, infer V, CodecMap>
     ? keyof V extends never
       ? {
@@ -34,7 +34,7 @@ export type LinkProps<T extends Routeway> =
 
 /**
  * A wrapper over react-router-dom's `<Link>` component, with the difference
- * that the `to` prop expects a {@link Routeway} route instead of a path string.
+ * that the `to` prop expects a `Routeway` route instead of a path string.
  *
  * If the route requires path variables and/or query parameters, you can pass
  * them over the `params` prop.

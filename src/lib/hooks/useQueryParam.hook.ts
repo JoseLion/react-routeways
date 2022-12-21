@@ -13,7 +13,8 @@ type SetQueryParam<
 
 /**
  * Returns a tuple of a stateful value of the specified query param, and a
- * function to update it. Just like the {@link useState} hook would.
+ * function to update it. Just like the {@link https://beta.reactjs.org/apis/react/useState useState}
+ * hook would.
  *
  * However, because the source of truth for this state is the current url,
  * whenever the state is updated in one component, it will be also updated in
@@ -30,7 +31,8 @@ export function useQueryParam<Q extends CodecMap, K extends Extract<keyof Q, str
 ): UseQueryParam<Optional<CodecsToRecord<Q>[K]>>;
 /**
  * Returns a tuple of a stateful value of the specified query param, and a
- * function to update it. Just like the {@link useState} hook would.
+ * function to update it. Just like the {@link https://beta.reactjs.org/apis/react/useState useState}
+ * hook would.
  *
  * However, because the source of truth for this state is the current location,
  * whenever the state is updated in one component, it will be also updated in
