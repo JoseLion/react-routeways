@@ -1,3 +1,11 @@
+[![CircleCI](https://dl.circleci.com/status-badge/img/gh/JoseLion/react-routeways/tree/main.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/JoseLion/react-routeways/tree/main)
+[![NPM version](https://img.shields.io/npm/v/react-routeways)](https://www.npmjs.com/package/react-routeways)
+[![NPM bundle size](https://img.shields.io/bundlephobia/min/react-routeways)](https://www.npmjs.com/package/react-routeways)
+[![NPM downloads](https://img.shields.io/npm/dm/react-routeways)](https://www.npmjs.com/package/react-routeways)
+[![NPM license](https://img.shields.io/npm/l/react-routeways)](./LICENSE)
+[![GitHub Release Date](https://img.shields.io/github/release-date/JoseLion/react-routeways)](https://github.com/JoseLion/react-routeways/releases)
+[![Snyk Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/react-routeways)](https://snyk.io/)
+
 # React Routeways
 
 This is not another React routing library. Instead, it's a complete abstraction to use [ts-routeways](https://github.com/JoseLion/ts-routeways) together with [react-router-dom](https://reactrouter.com/), providing all the type safety, url parsing/generation, and codecs definition of `ts-routeways` to the your `react-router-dom` routes, hooks, and components.
