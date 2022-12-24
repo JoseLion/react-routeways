@@ -11,6 +11,8 @@ type SetQueryParam<
   K extends Extract<keyof Q, string>,
 > = SetStateAction<Partial<CodecsToRecord<Q>>[K]>;
 
+const undef = Symbol("represents an undefined detail on useQueryParam hook");
+
 /**
  * Returns a tuple of a stateful value of the specified query param, and a
  * function to update it. Just like the {@link https://beta.reactjs.org/apis/react/useState useState}
@@ -70,22 +72,28 @@ export function useQueryParam<Q extends CodecMap, K extends Extract<keyof Q, str
   const [queryParam, setQueryParam] = useState(route.parseUrl(url).queryParams[key]);
 
   const dispatch = useCallback((value: SetQueryParam<Q, K>): void => {
-    const detail = isFunctionAction(value)
+    const result = isFunctionAction(value)
       ? value(queryParam)
       : value;
-    const event = new CustomEvent<SetQueryParam<Q, K>>(eventType, { detail });
+    const detail = typeof result === "undefined"
+      ? undef
+      : result;
+    const event = new CustomEvent<SetQueryParam<Q, K> | typeof undef>(eventType, { detail });
 
-    setQueryParam(detail);
+    setQueryParam(value);
     window.dispatchEvent(event);
   }, [queryParam, window]);
 
   useEffect(() => {
-    const listener = (event: Event | CustomEvent<SetQueryParam<Q, K>>): void => {
+    const listener = (event: Event | CustomEvent<SetQueryParam<Q, K> | typeof undef>): void => {
       if ("detail" in event) {
         const { pathVars, queryParams } = route.parseUrl(url);
+        const value = event.detail === undef
+          ? undefined
+          : event.detail;
 
-        setQueryParam(event.detail);
-        navigate(route.makeUrl({ ...pathVars, ...queryParams, [key]: event.detail }));
+        setQueryParam(value);
+        navigate(route.makeUrl({ ...pathVars, ...queryParams, [key]: value }));
       }
     };
 

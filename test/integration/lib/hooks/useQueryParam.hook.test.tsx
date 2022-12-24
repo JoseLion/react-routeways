@@ -10,8 +10,8 @@ import { TestRoutes } from "../../../helpers/routes";
 const { library } = TestRoutes;
 
 function TestComp(): ReactElement {
-  const [page, setPage] = useQueryParam(library, "page");
-  const [search, setSearch] = useQueryParam(library, "search", "foo");
+  const [page, setPage] = useQueryParam(library, "page", 1);
+  const [search, setSearch] = useQueryParam(library, "search");
 
   const changePage = useCallback((): void => {
     setPage(5);
@@ -21,15 +21,21 @@ function TestComp(): ReactElement {
     setSearch("bar");
   }, [setSearch]);
 
+  const clear = useCallback((): void => {
+    setSearch(undefined);
+  }, [setSearch]);
+
   return (
     <div>
-      <h1>{`Page: ${String(page)}`}</h1>
+      <h1>{`Page: ${page}`}</h1>
 
-      <h1>{`Search: ${search}`}</h1>
+      <h1>{`Search: ${String(search)}`}</h1>
 
       <button onClick={changePage}>{"Change page"}</button>
 
       <button onClick={changeSearch}>{"Change search"}</button>
+
+      <button onClick={clear}>{"Clear search"}</button>
 
       <Inner />
     </div>
@@ -37,7 +43,7 @@ function TestComp(): ReactElement {
 }
 
 function Inner(): ReactElement {
-  const [page, setPage] = useQueryParam(library, "page");
+  const [page, setPage] = useQueryParam(library, "page", 1);
 
   const fistPage = useCallback((): void => {
     setPage((prev = 0) => prev - 2);
@@ -69,7 +75,7 @@ describe("[Integration] useQueryParam.hook.test.tsx", () => {
           const url = library.makeUrl({ libId: 1 });
           const { getByRole } = renderWithRouter(<TestComp />, { url });
 
-          await waitFor(() => getByRole("heading", { level: 1, name: "Page: undefined" }));
+          await waitFor(() => getByRole("heading", { level: 1, name: "Search: undefined" }));
         });
       });
 
@@ -78,7 +84,7 @@ describe("[Integration] useQueryParam.hook.test.tsx", () => {
           const url = library.makeUrl({ libId: 1 });
           const { getByRole } = renderWithRouter(<TestComp />, { url });
 
-          await waitFor(() => getByRole("heading", { level: 1, name: "Search: foo" }));
+          await waitFor(() => getByRole("heading", { level: 1, name: "Page: 1" }));
         });
       });
     });
@@ -86,14 +92,13 @@ describe("[Integration] useQueryParam.hook.test.tsx", () => {
 
   context("when the query param is changed", () => {
     it("updates all query param states and the url", async () => {
-      const url = library.makeUrl({ libId: 1, page: 3 });
+      const url = library.makeUrl({ libId: 1 });
       const { getByRole } = renderWithRouter(<TestComp />, { url });
 
       await waitFor(() => {
-        getByRole("heading", { level: 1, name: "Page: 3" });
-        getByRole("heading", { level: 1, name: "Search: foo" });
+        getByRole("heading", { level: 1, name: "Page: 1" });
 
-        getByRole("heading", { level: 2, name: "Inner Page: 3" });
+        getByRole("heading", { level: 2, name: "Inner Page: 1" });
       });
 
       await userEvent.click(getByRole("button", { name: "Change page" }));
@@ -133,6 +138,27 @@ describe("[Integration] useQueryParam.hook.test.tsx", () => {
       });
 
       expect(window.location.search).toBeEqual("?page=1");
+    });
+  });
+
+  context("when the query param is set to undefined", () => {
+    it("changes the state to undefined and removes the query string", async () => {
+      const url = library.makeUrl({ libId: 1 });
+      const { getByRole, findByRole } = renderWithRouter(<TestComp />, { url });
+
+      const changeButton = await findByRole("button", { name: "Change search" });
+
+      await userEvent.click(changeButton);
+
+      await waitFor(() => getByRole("heading", { level: 1, name: "Search: bar" }));
+
+      expect(window.location.search).toBeEqual("?search=bar");
+
+      await userEvent.click(getByRole("button", { name: "Clear search" }));
+
+      await waitFor(() => getByRole("heading", { level: 1, name: "Search: undefined" }));
+
+      expect(window.location.search).toBeEmpty();
     });
   });
 });
