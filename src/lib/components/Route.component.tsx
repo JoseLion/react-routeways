@@ -1,10 +1,10 @@
 import { ReactElement } from "react";
-import { PathRouteProps, Route as OriginalRoute } from "react-router-dom";
+import { RouteProps as OriginalRouteProps, Route as OriginalRoute } from "react-router-dom";
 import { Routeway } from "ts-routeways";
 
 import { Nullable } from "../helpers/commons";
 
-export interface RouteProps extends Omit<PathRouteProps, "path"> {
+export interface RouteProps extends Omit<OriginalRouteProps, "path"> {
   /**
    * Enables the "catchall" splat for the route. This means that a `/*` string
    * will be appended to the end othe the path when the template is generated
