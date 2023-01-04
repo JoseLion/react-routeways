@@ -1,4 +1,4 @@
-import { Children, ReactElement, ReactFragment } from "react";
+import { Children, Fragment, isValidElement, ReactElement, ReactFragment } from "react";
 import {
   Route as OriginalRoute,
   Routes as OriginalRoutes,
@@ -28,26 +28,36 @@ export interface RoutesProps extends OriginalRoutesProps {
 export const Routes = new Proxy(OriginalRoutes, {
   apply(target, thisArg, argArray) {
     const propsArg = argArray.at(0) as RoutesProps;
-    const propsChildren = Children.map(propsArg.children, child => {
-      const isRouteChild = typeof child === "object"
-        && child !== null
-        && "type" in child
-        && child.type === Route
-        && "route" in child.props;
+    const children = makePatchedChildren(propsArg);
 
-      if (isRouteChild) {
-        const { children, catchAll = false, route, index, ...rest } = child.props as RouteProps;
-        const splat = catchAll ? "/*" : "";
-        const path = route === "*" ? route : route?.template().concat(splat);
-
-        return index === true
-          ? <OriginalRoute {...rest} index={true} />
-          : <OriginalRoute {...rest} index={index} path={path}>{children}</OriginalRoute>;
-      }
-
-      return child;
-    });
-
-    return Reflect.apply(target, thisArg, [{ ...propsArg, children: propsChildren }]) as Nullable<ReactElement>;
+    return Reflect.apply(target, thisArg, [{ ...propsArg, children }]) as Nullable<ReactElement>;
   },
 }) as (props: RoutesProps) => Nullable<ReactElement>;
+
+function makePatchedChildren(props: RoutesProps): ReactElement<RouteProps>[] {
+  return Children.toArray(props.children).flatMap(child => {
+    if (isValidElement(child)) {
+      const isRouteChild = typeof child === "object"
+          && child !== null
+          && "type" in child
+          && child.type === Route
+          && "route" in child.props;
+
+        if (isRouteChild) {
+          const { children, catchAll = false, route, index, ...rest } = child.props as RouteProps;
+          const splat = catchAll ? "/*" : "";
+          const path = route === "*" ? route : route?.template().concat(splat);
+
+          return index === true
+            ? <OriginalRoute {...rest} index={true} />
+            : <OriginalRoute {...rest} index={index} path={path}>{children}</OriginalRoute>;
+        }
+
+        if (child.type === Fragment) {
+          return makePatchedChildren(child.props as RoutesProps);
+        }
+      }
+
+      throw Error("Invalid children element");
+  });
+}
