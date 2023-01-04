@@ -1,12 +1,12 @@
 import { render, waitFor } from "@testing-library/react";
-import { BrowserRouter, Link as RRLink } from "react-router-dom";
 import userEvent from "@testing-library/user-event";
+import { BrowserRouter, Link as RRLink } from "react-router-dom";
 
+import { Link } from "../../../../src/lib/components/Link.component";
 import { Route } from "../../../../src/lib/components/Route.component";
+import { Routes } from "../../../../src/lib/components/Routes.component";
 import { TestScreen } from "../../../helpers/renderWith";
 import { TestRoutes } from "../../../helpers/routes";
-import { Routes } from "../../../../src/lib/components/Routes.component";
-import { Link } from "../../../../src/lib/components/Link.component";
 
 const { home, library } = TestRoutes;
 

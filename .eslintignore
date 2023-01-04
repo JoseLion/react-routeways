@@ -1,4 +1,5 @@
 .yarn/**/*
 build/**/*
 dist/**/*
+docs/build/**/*
 node_modules/**/*

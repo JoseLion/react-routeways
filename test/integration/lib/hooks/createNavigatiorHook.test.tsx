@@ -1,12 +1,12 @@
-import { renderHook, waitFor } from "@testing-library/react";
-import { ReactElement, useCallback } from "react";
 import { expect } from "@stackbuilders/assertive-ts";
+import { renderHook, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { ReactElement, useCallback } from "react";
 import { BrowserRouter } from "react-router-dom";
 
 import { createNavigatorHook } from "../../../../src/lib/hooks/createNavigatorHook";
-import { TestRoutes } from "../../../helpers/routes";
 import { renderWithNav } from "../../../helpers/renderWith";
+import { TestRoutes } from "../../../helpers/routes";
 
 const useNavigator = createNavigatorHook(TestRoutes);
 
