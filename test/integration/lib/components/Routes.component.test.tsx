@@ -47,10 +47,15 @@ describe("[Integration] Routes.component.test.tsx", () => {
         <Routes>
           <Route route="*" element={<TestScreen title="404" />} />
           <Route route={home} catchAll={true} element={<TestScreen title="Home Splat" />} />
-          <Route route={home} element={<TestScreen title="Home" />} />
-          <Route route={library} element={<TestScreen title="Library" />} />
-          <Route route={library.author} element={<TestScreen title="Author" />} />
-          <Route route={library.author.book} element={<TestScreen title="Book" />} />
+
+          <>
+            <Route route={home} element={<TestScreen title="Home" />} />
+            <Route route={library} element={<TestScreen title="Library" />} />
+            <>
+              <Route route={library.author} element={<TestScreen title="Author" />} />
+              <Route route={library.author.book} element={<TestScreen title="Book" />} />
+            </>
+          </>
         </Routes>
       </BrowserRouter>
     );
