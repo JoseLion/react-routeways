@@ -1,10 +1,10 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { expectTypeOf } from "expect-type";
-import { Routeway } from "ts-routeways";
 import { NavigateProps as OriginalnavigateProps } from "react-router-dom";
+import { Routeway } from "ts-routeways";
 
-import { TestRoutes } from "../../../helpers/routes";
 import { Navigate, NavigateProps } from "../../../../src/lib/components/Navigate.component";
+import { TestRoutes } from "../../../helpers/routes";
 
 const { home, library } = TestRoutes;
 

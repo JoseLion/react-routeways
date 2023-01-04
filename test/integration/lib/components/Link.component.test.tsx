@@ -1,6 +1,6 @@
 import { waitFor } from "@testing-library/dom";
-import { ReactElement } from "react";
 import userEvent from "@testing-library/user-event";
+import { ReactElement } from "react";
 
 import { Link } from "../../../../src/lib/components/Link.component";
 import { renderWithNav } from "../../../helpers/renderWith";

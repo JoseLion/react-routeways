@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { expectTypeOf } from "expect-type";
-import { Routeway } from "ts-routeways";
 import { NavLinkProps as OriginalNavLinkProps } from "react-router-dom";
+import { Routeway } from "ts-routeways";
 
 import { NavLink, NavLinkProps } from "../../../../src/lib/components/NavLink.component";
 import { TestRoutes } from "../../../helpers/routes";

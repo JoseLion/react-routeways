@@ -1,9 +1,9 @@
 {
+  "root": true,
   "env": {
     "es6": true,
     "node": true
   },
-  "root": true,
   "settings": {
     "react": {
       "version": "detect"
@@ -29,7 +29,11 @@
     "plugin:react/jsx-runtime"
   ],
   "overrides": [{
-    "files": ["*.ts", "*.tsx"]
+    "files": ["test/**/*.ts?(x)"],
+    "rules": {
+      "@typescript-eslint/no-non-null-assertion": "off",
+      "@typescript-eslint/restrict-template-expressions": "off"
+    }
   }, {
     "files": ["*.js"],
     "rules": {
@@ -58,8 +62,8 @@
         "public-method",
         "private-method"
       ],
-      "interfaces": { "order": "natural" },
-      "typeLiterals": { "order": "natural" }
+      "interfaces": { "order": "alphabetically" },
+      "typeLiterals": { "order": "alphabetically" }
     }],
     "@typescript-eslint/member-delimiter-style": ["error", {
       "multiline": {
@@ -73,12 +77,21 @@
     }],
     "@typescript-eslint/no-empty-function": "error",
     "@typescript-eslint/no-empty-interface": "error",
-    "@typescript-eslint/no-explicit-any": "error",
+    "@typescript-eslint/no-explicit-any": ["error", { "ignoreRestArgs": true }],
     "@typescript-eslint/no-floating-promises": "off",
+    "@typescript-eslint/no-inferrable-types": ["error", {
+      "ignoreParameters": true,
+      "ignoreProperties": true
+    }],
     "@typescript-eslint/no-misused-new": "error",
+    "@typescript-eslint/no-namespace": "off",
+    "@typescript-eslint/no-non-null-assertion": "error",
     "@typescript-eslint/no-shadow": ["error", { "hoist": "all" }],
     "@typescript-eslint/no-unused-expressions": ["error", { "allowTernary": true }],
-    "@typescript-eslint/no-unused-vars": ["error", { "destructuredArrayIgnorePattern": "^_" }],
+    "@typescript-eslint/no-unused-vars": ["error", {
+      "destructuredArrayIgnorePattern": "^_",
+      "ignoreRestSiblings": true
+    }],
     "@typescript-eslint/no-var-requires": "error",
     "@typescript-eslint/parameter-properties": "error",
     "@typescript-eslint/prefer-for-of": "error",
@@ -88,53 +101,72 @@
       "avoidEscape": true,
       "allowTemplateLiterals": false
     }],
+    "@typescript-eslint/restrict-template-expressions": ["error", {
+      "allowNumber": true,
+      "allowBoolean": true,
+      "allowNullish": true
+    }],
     "@typescript-eslint/semi": "error",
     "@typescript-eslint/space-infix-ops": "error",
     "@typescript-eslint/triple-slash-reference": "error",
     "@typescript-eslint/type-annotation-spacing": "error",
-    "@typescript-eslint/unbound-method": "error",
+    "@typescript-eslint/unbound-method": ["error", { "ignoreStatic": true }],
     "@typescript-eslint/unified-signatures": "error",
     "arrow-parens": ["error", "as-needed"],
     "arrow-spacing": "error",
+    "brace-style": "error",
     "camelcase": "error",
     "comma-spacing": "error",
     "constructor-super": "error",
+    "curly": "error",
     "eol-last": "error",
     "eqeqeq": "error",
+    "func-style": ["error", "declaration", { "allowArrowFunctions": true }],
     "import/order": ["error", {
+      "alphabetize": {
+        "caseInsensitive": false,
+        "order": "asc"
+      },
       "newlines-between": "always",
       "groups": ["external", "parent", "sibling"]
     }],
     "jsdoc/check-alignment": "error",
     "jsdoc/check-indentation": ["error", { "excludeTags": ["example", "param", "returns"] }],
     "jsdoc/newline-after-description": "error",
+    "jsx-quotes": "error",
     "keyword-spacing": "error",
     "linebreak-style": "error",
     "max-classes-per-file": ["error", 1],
     "max-len": ["error", {
       "code": 120,
       "comments": 80,
+      "ignoreRegExpLiterals": true,
+      "ignorePattern": "^import (\\{ )?\\w+( \\})? from \".+\";$",
       "ignoreUrls": true,
       "tabWidth": 2
     }],
     "new-parens": "error",
     "no-caller": "error",
     "no-cond-assign": "error",
-    "no-console": ["error", { "allow": ["warn"] }],
+    "no-console": "error",
     "no-duplicate-imports": "error",
+    "no-empty-function": "error",
     "no-eval": "error",
     "no-extra-boolean-cast": ["error", { "enforceForLogicalOperands": true }],
     "no-invalid-this": "error",
     "no-labels": "error",
     "no-multi-spaces": "error",
     "no-new-wrappers": "error",
+    "no-param-reassign": "error",
     "no-throw-literal": "error",
     "no-trailing-spaces": "error",
     "no-underscore-dangle": "error",
+    "no-useless-computed-key": ["error", { "enforceForClassMembers": true }],
     "no-var": "error",
     "object-shorthand": "error",
     "one-var": ["error", "never"],
     "prefer-const": "error",
+    "quote-props": ["error", "as-needed"],
     "radix": "error",
     "rest-spread-spacing": "error",
     "react/display-name": "off",
@@ -148,6 +180,7 @@
     }],
     "react/jsx-no-bind": "error",
     "react/jsx-tag-spacing": "error",
+    "react/prop-types": "off",
     "react/self-closing-comp": "error",
     "react-hooks/rules-of-hooks": "error",
     "semi-spacing": "error",

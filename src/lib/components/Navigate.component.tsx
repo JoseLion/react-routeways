@@ -1,6 +1,6 @@
 import { ReactElement, useMemo } from "react";
-import { CodecMap, PathLike, Routeway } from "ts-routeways";
 import { Navigate as OriginalNavigate, NavigateProps as OriginalNavigateProps } from "react-router-dom";
+import { CodecMap, PathLike, Routeway } from "ts-routeways";
 
 export interface BaseNavigateProps<T extends Routeway> {
   /**

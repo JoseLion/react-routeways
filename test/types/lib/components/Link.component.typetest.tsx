@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/ban-ts-comment */
 import { expectTypeOf } from "expect-type";
-import { Routeway } from "ts-routeways";
 import { LinkProps as OriginalLinkProps } from "react-router-dom";
+import { Routeway } from "ts-routeways";
 
 import { Link, LinkProps } from "../../../../src/lib/components/Link.component";
 import { TestRoutes } from "../../../helpers/routes";

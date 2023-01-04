@@ -1,10 +1,10 @@
 import { waitFor } from "@testing-library/dom";
-import { ReactElement } from "react";
 import userEvent from "@testing-library/user-event";
+import { ReactElement } from "react";
 
+import { NavLink } from "../../../../src/lib/components/NavLink.component";
 import { renderWithNav } from "../../../helpers/renderWith";
 import { TestRoutes } from "../../../helpers/routes";
-import { NavLink } from "../../../../src/lib/components/NavLink.component";
 
 const { home, library } = TestRoutes;
 
