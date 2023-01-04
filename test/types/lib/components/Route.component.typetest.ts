@@ -13,6 +13,10 @@ expectTypeOf(Route)
   .parameter(0)
   .toHaveProperty("catchAll")
   .toEqualTypeOf<Optional<boolean>>();
+expectTypeOf(Route)
+  .parameter(0)
+  .toHaveProperty("index")
+  .toEqualTypeOf<Optional<boolean>>();
 
 expectTypeOf(Route)
   .parameter(0)

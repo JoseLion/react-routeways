@@ -5,6 +5,6 @@ import { Route } from "../../../../src/lib/components/Route.component";
 
 describe("[Integration] Route.component.test.tsx", () => {
   it("is referentially equal to react-router-dom Route component", () => {
-    expect(Route).toBeSame(OriginalRoute);
+    expect(Route).toBeSame(OriginalRoute as typeof Route);
   });
 });

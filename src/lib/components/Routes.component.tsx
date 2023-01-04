@@ -28,7 +28,7 @@ export interface RoutesProps extends OriginalRoutesProps {
 export const Routes = new Proxy(OriginalRoutes, {
   apply(target, thisArg, argArray) {
     const propsArg = argArray.at(0) as RoutesProps;
-    const children = Children.map(propsArg.children, child => {
+    const propsChildren = Children.map(propsArg.children, child => {
       const isRouteChild = typeof child === "object"
         && child !== null
         && "type" in child
@@ -36,16 +36,18 @@ export const Routes = new Proxy(OriginalRoutes, {
         && "route" in child.props;
 
       if (isRouteChild) {
-        const { catchAll = false, route, ...rest } = child.props as RouteProps;
+        const { children, catchAll = false, route, index, ...rest } = child.props as RouteProps;
         const splat = catchAll ? "/*" : "";
         const path = route === "*" ? route : route?.template().concat(splat);
 
-        return <OriginalRoute {...rest} path={path} />;
+        return index === true
+          ? <OriginalRoute {...rest} index={true} />
+          : <OriginalRoute {...rest} index={index} path={path}>{children}</OriginalRoute>;
       }
 
       return child;
     });
 
-    return Reflect.apply(target, thisArg, [{ ...propsArg, children }]) as Nullable<ReactElement>;
+    return Reflect.apply(target, thisArg, [{ ...propsArg, children: propsChildren }]) as Nullable<ReactElement>;
   },
 }) as (props: RoutesProps) => Nullable<ReactElement>;
