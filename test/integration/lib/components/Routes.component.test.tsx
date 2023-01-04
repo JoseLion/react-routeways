@@ -52,8 +52,10 @@ describe("[Integration] Routes.component.test.tsx", () => {
             <Route route={home} element={<TestScreen title="Home" />} />
             <Route route={library} element={<TestScreen title="Library" />} />
             <>
-              <Route route={library.author} element={<TestScreen title="Author" />} />
-              <Route route={library.author.book} element={<TestScreen title="Book" />} />
+              <Route route={library.author}>
+                <Route index={true} element={<TestScreen title="Author" />} />
+                <Route route={library.author.book} element={<TestScreen title="Book" />} />
+              </Route>
             </>
           </>
         </Routes>
