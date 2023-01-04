@@ -28,14 +28,14 @@ export interface RoutesProps extends OriginalRoutesProps {
 export const Routes = new Proxy(OriginalRoutes, {
   apply(target, thisArg, argArray) {
     const propsArg = argArray.at(0) as RoutesProps;
-    const children = makePatchedChildren(propsArg);
+    const children = makePatchedChildren(propsArg.children);
 
     return Reflect.apply(target, thisArg, [{ ...propsArg, children }]) as Nullable<ReactElement>;
   },
 }) as (props: RoutesProps) => Nullable<ReactElement>;
 
-function makePatchedChildren(props: RoutesProps): ReactElement<RouteProps>[] {
-  return Children.toArray(props.children).flatMap(child => {
+function makePatchedChildren(propsChildren: RoutesProps["children"]): ReactElement<RouteProps>[] {
+  return Children.toArray(propsChildren).flatMap(child => {
     if (isValidElement(child)) {
       const isRouteChild = typeof child === "object"
           && child !== null
@@ -48,16 +48,24 @@ function makePatchedChildren(props: RoutesProps): ReactElement<RouteProps>[] {
           const splat = catchAll ? "/*" : "";
           const path = route === "*" ? route : route?.template().concat(splat);
 
-          return index === true
-            ? <OriginalRoute {...rest} index={true} />
-            : <OriginalRoute {...rest} index={index} path={path}>{children}</OriginalRoute>;
+          if (index === true) {
+            return <OriginalRoute {...rest} index={true} />;
+          }
+
+          return children !== undefined
+            ? (
+              <OriginalRoute {...rest} index={index} path={path}>
+                {makePatchedChildren(children)}
+              </OriginalRoute>
+            )
+            : <OriginalRoute {...rest} index={index} path={path} />;
         }
 
         if (child.type === Fragment) {
-          return makePatchedChildren(child.props as RoutesProps);
+          return makePatchedChildren((child.props as RoutesProps).children);
         }
       }
 
-      throw Error("Invalid children element");
+      return child as ReactElement<RouteProps>;
   });
 }

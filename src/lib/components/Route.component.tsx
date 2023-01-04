@@ -1,4 +1,4 @@
-import { ReactElement } from "react";
+import { ReactElement, ReactFragment } from "react";
 import { RouteProps as OriginalRouteProps, Route as OriginalRoute } from "react-router-dom";
 import { Routeway } from "ts-routeways";
 
@@ -14,10 +14,20 @@ export interface RouteProps extends Omit<OriginalRouteProps, "path"> {
    */
   catchAll?: boolean;
   /**
+   * Optional nested react-routeways `Route` component(s). It also supports
+   * React `Fragment` components(s) as react-router-dom's `Route` does.
+   */
+  children?:
+    | ReactElement<RouteProps>[]
+    | ReactElement<RouteProps>
+    | ReactFragment[]
+    | ReactFragment;
+  /**
    * The `Routeway` route to take the template to set to the `path` prop
    * of react-router-dom's `Route` component.
    *
-   * The splat `*` character is also a supported value.
+   * The splat `*` character is also a supported value. To append a splat `*`
+   * to a route you can set the {@link catchAll} prop to `true`.
    */
   route?: Routeway | "*";
 }
