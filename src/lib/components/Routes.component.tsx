@@ -54,11 +54,11 @@ function makePatchedChildren(propsChildren: RoutesProps["children"]): ReactEleme
 
           return children !== undefined
             ? (
-              <OriginalRoute {...rest} index={index} path={path}>
+              <OriginalRoute key={path} {...rest} index={index} path={path}>
                 {makePatchedChildren(children)}
               </OriginalRoute>
             )
-            : <OriginalRoute {...rest} index={index} path={path} />;
+            : <OriginalRoute key={path} {...rest} index={index} path={path} />;
         }
 
         if (child.type === Fragment) {
