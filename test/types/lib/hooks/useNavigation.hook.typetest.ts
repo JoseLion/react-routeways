@@ -52,4 +52,3 @@ expectTypeOf(resetTo(library)).toEqualTypeOf<() => void>();
 expectTypeOf(resetTo(library.author, { libId: 1 })).toEqualTypeOf<() => void>();
 // @ts-expect-error
 expectTypeOf(resetTo(library.author.book, { authorId: 1, libId: 1 })).toEqualTypeOf<() => void>();
-

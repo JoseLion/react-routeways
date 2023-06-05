@@ -1,5 +1,8 @@
-.yarn/**/*
-build/**/*
-dist/**/*
-docs/build/**/*
-node_modules/**/*
+### Dependencies ###
+.yarn/
+node_modules/
+
+### Auto-generated ###
+build/
+dist/
+docs/build/

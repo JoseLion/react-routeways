@@ -62,7 +62,7 @@ export function useQueryParam<Q extends CodecMap, K extends Extract<keyof Q, str
 
   const eventType = useMemo(
     (): string => `setQueryParam[${key}]`,
-    [key]
+    [key],
   );
   const url = useMemo((): string => {
     const { hash, pathname, search } = location;

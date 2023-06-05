@@ -18,7 +18,7 @@ expectTypeOf(
     params={{ authorId: 1, libId: 1 }}
   >
       {"..."}
-  </NavLink>
+  </NavLink>,
 )
 .toEqualTypeOf<JSX.Element>();
 expectTypeOf(
@@ -27,7 +27,7 @@ expectTypeOf(
     params={{ authorId: 1, bookId: 1, libId: 1 }}
   >
     {"..."}
-  </NavLink>
+  </NavLink>,
 )
 .toEqualTypeOf<JSX.Element>();
 

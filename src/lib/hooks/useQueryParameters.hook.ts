@@ -26,7 +26,7 @@ const eventType = "setQueryParameters";
  *          them
  */
 export function useQueryParameters<T extends Routeway>(
-  route: T
+  route: T,
 ): UseQueryParameters<ReturnType<T["parseUrl"]>["queryParams"]> {
   const location = useLocation();
   const navigate = useNavigate();

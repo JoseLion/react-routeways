@@ -59,7 +59,7 @@ describe("[Integration] Routes.component.test.tsx", () => {
             </>
           </>
         </Routes>
-      </BrowserRouter>
+      </BrowserRouter>,
     );
 
     await waitFor(() => getByRole("heading", { level: 1, name: "404" }));

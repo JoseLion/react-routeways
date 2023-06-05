@@ -19,7 +19,7 @@ expectTypeOf(
     params={{ authorId: 1, bookId: 1, libId: 1 }}
   >
     {"..."}
-  </Link>
+  </Link>,
 )
 .toEqualTypeOf<JSX.Element>();
 

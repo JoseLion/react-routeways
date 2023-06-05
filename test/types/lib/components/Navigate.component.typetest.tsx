@@ -17,7 +17,7 @@ expectTypeOf(
   <Navigate
     to={library.author.book}
     params={{ authorId: 1, bookId: 1, libId: 1 }}
-  />
+  />,
 )
 .toEqualTypeOf<JSX.Element>();
 
