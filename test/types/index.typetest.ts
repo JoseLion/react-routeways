@@ -28,4 +28,3 @@ expectTypeOf<RouteProps>().not.toBeAny();
 expectTypeOf<RoutesProps>().not.toBeAny();
 expectTypeOf<LinkProps<Routeway>>().not.toBeAny();
 expectTypeOf<NavLinkProps<Routeway>>().not.toBeAny();
-

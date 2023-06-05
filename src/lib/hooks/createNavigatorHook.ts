@@ -37,7 +37,7 @@ export type NavigateMethods<V extends CodecMap, Q extends CodecMap> =
  * @returns a navigation hook of the custom `Routeways` routes
  */
 export function createNavigatorHook<T extends Record<string, Routeway>>(routes: T): () => NavigatorHook<T> {
-  const useNavigatorHook = (): NavigatorHook<T> => {
+  return () => {
     const navigate = useNavigate();
 
     const routesAsNavigator = useCallback(<S extends Record<string, Routeway>>(routeMap: S): NavigatorHook<S> => {
@@ -79,6 +79,4 @@ export function createNavigatorHook<T extends Record<string, Routeway>>(routes: 
       return routesAsNavigator(routes);
     }, [routesAsNavigator, routes]);
   };
-
-  return useNavigatorHook;
 }

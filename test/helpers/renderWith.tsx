@@ -45,7 +45,7 @@ export function renderWithNav(Element: ReactElement, options: RenderOptions = { 
           </Route>
         </Route>
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter>,
   );
 }
 
@@ -58,6 +58,6 @@ export function renderWithRouter(Element: ReactElement, options: RenderOptions =
       <Routes>
         <Route path="*" element={Element} />
       </Routes>
-    </BrowserRouter>
+    </BrowserRouter>,
   );
 }
