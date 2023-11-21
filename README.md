@@ -1,10 +1,12 @@
-[![CircleCI](https://dl.circleci.com/status-badge/img/gh/JoseLion/react-routeways/tree/main.svg?style=shield)](https://dl.circleci.com/status-badge/redirect/gh/JoseLion/react-routeways/tree/main)
-[![NPM version](https://img.shields.io/npm/v/react-routeways)](https://www.npmjs.com/package/react-routeways)
+[![CI](https://github.com/JoseLion/react-routeways/actions/workflows/ci.yml/badge.svg)](https://github.com/JoseLion/react-routeways/actions/workflows/ci.yml)
+[![Pages](https://github.com/JoseLion/react-routeways/actions/workflows/pages.yml/badge.svg)](https://github.com/JoseLion/react-routeways/actions/workflows/pages.yml)
+[![Release](https://github.com/JoseLion/react-routeways/actions/workflows/release.yml/badge.svg)](https://github.com/JoseLion/react-routeways/actions/workflows/release.yml)
+[![NPM version](https://img.shields.io/npm/v/react-routeways?logo=npm)](https://www.npmjs.com/package/react-routeways)
 [![NPM bundle size](https://img.shields.io/bundlephobia/min/react-routeways)](https://www.npmjs.com/package/react-routeways)
 [![NPM downloads](https://img.shields.io/npm/dm/react-routeways)](https://www.npmjs.com/package/react-routeways)
-[![NPM license](https://img.shields.io/npm/l/react-routeways)](./LICENSE)
+[![NPM license](https://img.shields.io/npm/l/react-routeways)](https://github.com/stackbuilders/assertive-ts/blob/main/LICENSE)
 [![GitHub Release Date](https://img.shields.io/github/release-date/JoseLion/react-routeways)](https://github.com/JoseLion/react-routeways/releases)
-[![Snyk Vulnerabilities](https://img.shields.io/snyk/vulnerabilities/npm/react-routeways)](https://snyk.io/)
+[![Known Vulnerabilities](https://snyk.io/test/github/JoseLion/react-routeways/badge.svg)](https://snyk.io/test/github/JoseLion/react-routeways)
 
 # React Routeways
 
