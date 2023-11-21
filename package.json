@@ -60,6 +60,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.11.2",
     "semantic-release": "^21.0.3",
+    "semantic-release-yarn": "^3.0.2",
     "ts-node": "^10.9.1",
     "ts-routeways": "^1.6.0",
     "tslib": "^2.5.3",
