@@ -1,4 +1,5 @@
 [![CI](https://github.com/JoseLion/react-routeways/actions/workflows/ci.yml/badge.svg)](https://github.com/JoseLion/react-routeways/actions/workflows/ci.yml)
+[![CodeQL](https://github.com/JoseLion/react-routeways/actions/workflows/codeql.yml/badge.svg)](https://github.com/JoseLion/react-routeways/actions/workflows/codeql.yml)
 [![Pages](https://github.com/JoseLion/react-routeways/actions/workflows/pages.yml/badge.svg)](https://github.com/JoseLion/react-routeways/actions/workflows/pages.yml)
 [![Release](https://github.com/JoseLion/react-routeways/actions/workflows/release.yml/badge.svg)](https://github.com/JoseLion/react-routeways/actions/workflows/release.yml)
 [![NPM version](https://img.shields.io/npm/v/react-routeways?logo=npm)](https://www.npmjs.com/package/react-routeways)
