@@ -1,4 +1,4 @@
-import { expect } from "@stackbuilders/assertive-ts";
+import { expect } from "@assertive-ts/core";
 import { waitFor } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
 import { ReactElement, useCallback } from "react";

@@ -1,5 +1,8 @@
-import { Children, Fragment, isValidElement, ReactElement, ReactFragment } from "react";
+import { Children, Fragment, isValidElement, ReactElement, ReactNode } from "react";
 import {
+  IndexRouteObject,
+  LazyRouteFunction,
+  NonIndexRouteObject,
   Route as OriginalRoute,
   Routes as OriginalRoutes,
   RoutesProps as OriginalRoutesProps,
@@ -17,8 +20,7 @@ export interface RoutesProps extends OriginalRoutesProps {
   children:
     | ReactElement<RouteProps>[]
     | ReactElement<RouteProps>
-    | ReactFragment[]
-    | ReactFragment;
+    | ReactNode;
 }
 
 /**
@@ -44,21 +46,33 @@ function makePatchedChildren(propsChildren: RoutesProps["children"]): ReactEleme
           && "route" in child.props;
 
         if (isRouteChild) {
-          const { children, catchAll = false, route, index, ...rest } = child.props as RouteProps;
+          const { children, catchAll = false, route, index, lazy, ...rest } = child.props as RouteProps;
           const splat = catchAll ? "/*" : "";
           const path = route === "*" ? route : route?.template().concat(splat);
+          const lazyIndex = lazy as LazyRouteFunction<IndexRouteObject>;
+          const lazyNonIndex = lazy as LazyRouteFunction<NonIndexRouteObject>;
 
           if (index === true) {
-            return <OriginalRoute {...rest} index={true} />;
+            return <OriginalRoute {...rest} index={true} lazy={lazyIndex} />;
           }
 
-          return children !== undefined
-            ? (
-              <OriginalRoute key={path} {...rest} index={index} path={path}>
-                {makePatchedChildren(children)}
-              </OriginalRoute>
-            )
-            : <OriginalRoute key={path} {...rest} index={index} path={path} />;
+          if (children === undefined) {
+            return (
+              <OriginalRoute
+                key={path}
+                {...rest}
+                index={index}
+                path={path}
+                lazy={lazyNonIndex}
+              />
+            );
+          }
+
+          return (
+            <OriginalRoute key={path} {...rest} index={index} path={path} lazy={lazyNonIndex}>
+              {makePatchedChildren(children)}
+            </OriginalRoute>
+          );
         }
 
         if (child.type === Fragment) {

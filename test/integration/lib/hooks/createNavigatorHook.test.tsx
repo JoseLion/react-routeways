@@ -1,4 +1,4 @@
-import { expect } from "@stackbuilders/assertive-ts";
+import { expect } from "@assertive-ts/core";
 import { renderHook, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ReactElement, useCallback } from "react";
@@ -51,7 +51,7 @@ describe("[Integration] createNavigatiorHook.test.tsx", () => {
       ];
 
       expect(routes).toSatisfyAll(route => {
-        expect(route).toContainAllKeys(["navigate", "reset"]);
+        expect(route).toContainAllKeys("navigate", "reset");
         expect(typeof route.navigate).toBeEqual("function");
         expect(typeof route.reset).toBeEqual("function");
       });

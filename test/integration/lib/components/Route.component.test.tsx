@@ -1,4 +1,4 @@
-import { expect } from "@stackbuilders/assertive-ts";
+import { expect } from "@assertive-ts/core";
 import { Route as OriginalRoute } from "react-router-dom";
 
 import { Route } from "../../../../src/lib/components/Route.component";
