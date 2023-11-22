@@ -45,8 +45,7 @@ expectTypeOf(useRouteParams(library.author.book)).toEqualTypeOf<
   >
 >();
 
-// @ts-expect-error
-expectTypeOf(useRouteParams(home)).toEqualTypeOf<
+expectTypeOf(useRouteParams(home)).not.toEqualTypeOf<
   UseRouteParams<
     RouteParams<
       { foo: Codec<string>; },
@@ -54,8 +53,7 @@ expectTypeOf(useRouteParams(home)).toEqualTypeOf<
     >
   >
 >();
-// @ts-expect-error
-expectTypeOf(useRouteParams(library)).toEqualTypeOf<
+expectTypeOf(useRouteParams(library)).not.toEqualTypeOf<
   UseRouteParams<
     RouteParams<
       { page: Codec<number>; },
@@ -63,8 +61,7 @@ expectTypeOf(useRouteParams(library)).toEqualTypeOf<
     >
   >
 >();
-// @ts-expect-error
-expectTypeOf(useRouteParams(library.author)).toEqualTypeOf<
+expectTypeOf(useRouteParams(library.author)).not.toEqualTypeOf<
   UseRouteParams<
     RouteParams<
       { libId: Codec<number>; },
@@ -72,8 +69,7 @@ expectTypeOf(useRouteParams(library.author)).toEqualTypeOf<
     >
   >
 >();
-// @ts-expect-error
-expectTypeOf(useRouteParams(library.author.book)).toEqualTypeOf<
+expectTypeOf(useRouteParams(library.author.book)).not.toEqualTypeOf<
   UseRouteParams<
     RouteParams<
       { authorId: Codec<number>; libId: Codec<number>; },

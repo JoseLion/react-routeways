@@ -1,4 +1,4 @@
-import { ReactElement, ReactFragment } from "react";
+import { ReactElement, ReactNode } from "react";
 import { RouteProps as OriginalRouteProps, Route as OriginalRoute } from "react-router-dom";
 import { Routeway } from "ts-routeways";
 
@@ -20,8 +20,7 @@ export interface RouteProps extends Omit<OriginalRouteProps, "path"> {
   children?:
     | ReactElement<RouteProps>[]
     | ReactElement<RouteProps>
-    | ReactFragment[]
-    | ReactFragment;
+    | ReactNode;
   /**
    * The `Routeway` route to take the template to set to the `path` prop
    * of react-router-dom's `Route` component.

@@ -8,7 +8,7 @@ import { Optional } from "../../../../src/lib/helpers/commons";
 expectTypeOf(Route)
   .parameter(0)
   .toHaveProperty("route")
-  .toEqualTypeOf<Routeway | "*">;
+  .toEqualTypeOf<Optional<Routeway | "*">>();
 expectTypeOf(Route)
   .parameter(0)
   .toHaveProperty("catchAll")

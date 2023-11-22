@@ -1,4 +1,4 @@
-import { expect } from "@stackbuilders/assertive-ts";
+import { expect } from "@assertive-ts/core";
 import { renderHook, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { ReactElement, useCallback } from "react";
@@ -45,7 +45,7 @@ describe("[Integration] useNavigation.hook.test.tsx", () => {
   it("creates a Navigation object", () => {
     const { result } = renderHook(useNavigation, { wrapper: BrowserRouter });
 
-    expect(result.current).toContainAllKeys(["goTo", "navigate", "reset", "resetTo"]);
+    expect(result.current).toContainAllKeys("goTo", "navigate", "reset", "resetTo");
     expect(safeKeys(result.current)).toSatisfyAll(key => {
       expect(typeof result.current[key]).toBeEqual("function");
     });

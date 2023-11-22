@@ -1,4 +1,4 @@
-import { expect } from "@stackbuilders/assertive-ts";
+import { expect } from "@assertive-ts/core";
 import { waitFor } from "@testing-library/dom";
 
 import { Navigate } from "../../../../src/lib/components/Navigate.component";
