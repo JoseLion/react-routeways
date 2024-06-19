@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { expectTypeOf } from "expect-type";
+import { JSX } from "react";
 import { NavLinkProps as OriginalNavLinkProps } from "react-router-dom";
 import { Routeway } from "ts-routeways";
 
@@ -17,7 +17,7 @@ expectTypeOf(
     to={library.author}
     params={{ authorId: 1, libId: 1 }}
   >
-      {"..."}
+    {"..."}
   </NavLink>,
 )
 .toEqualTypeOf<JSX.Element>();

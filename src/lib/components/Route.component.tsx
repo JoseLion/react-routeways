@@ -1,5 +1,5 @@
 import { ReactElement, ReactNode } from "react";
-import { RouteProps as OriginalRouteProps, Route as OriginalRoute } from "react-router-dom";
+import { Route as OriginalRoute, RouteProps as OriginalRouteProps } from "react-router-dom";
 import { Routeway } from "ts-routeways";
 
 import { Nullable } from "../helpers/commons";

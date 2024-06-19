@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useCallback, useMemo } from "react";
 import { Routeway } from "ts-routeways";
 
-import { isFunctionAction, NonOptional } from "../helpers/commons";
+import { NonOptional, isFunctionAction } from "../helpers/commons";
 
 import { usePathVars } from "./usePathVars.hook";
 import { useQueryParameters } from "./useQueryParameters.hook";
@@ -32,7 +32,6 @@ export function useRouteParams<T extends Routeway>(route: T): UseRouteParams<Non
   const [queryParams, setQueryParams] = useQueryParameters(route);
 
   const params = useMemo((): NonOptional<Parameters<T["makeUrl"]>[0]> => {
-
     return { ...pathVars, ...queryParams } as NonOptional<Parameters<T["makeUrl"]>[0]>;
   }, [pathVars, queryParams]);
 

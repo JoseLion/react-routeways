@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { expectTypeOf } from "expect-type";
 import { Routeway } from "ts-routeways";
 

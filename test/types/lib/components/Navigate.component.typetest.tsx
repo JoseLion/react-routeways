@@ -1,5 +1,5 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
 import { expectTypeOf } from "expect-type";
+import { JSX } from "react";
 import { NavigateProps as OriginalnavigateProps } from "react-router-dom";
 import { Routeway } from "ts-routeways";
 
