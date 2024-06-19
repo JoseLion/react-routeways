@@ -1,19 +1,19 @@
 import { expectTypeOf } from "expect-type";
 import { CodecMap, Routeway } from "ts-routeways";
 
-import {
-  type NavigateMethods,
-  type NavigateOptions,
-  type NavigatorHook,
-  type Navigation,
-  type UsePathVars,
-  type UseQueryParam,
-  type UseQueryParameters,
-  type UseRouteParams,
-  type RouteProps,
-  type RoutesProps,
-  type LinkProps,
-  type NavLinkProps,
+import type {
+  LinkProps,
+  NavLinkProps,
+  NavigateMethods,
+  NavigateOptions,
+  Navigation,
+  NavigatorHook,
+  RouteProps,
+  RoutesProps,
+  UsePathVars,
+  UseQueryParam,
+  UseQueryParameters,
+  UseRouteParams,
 } from "../../src/index";
 
 expectTypeOf<NavigateMethods<CodecMap, CodecMap>>().not.toBeAny();

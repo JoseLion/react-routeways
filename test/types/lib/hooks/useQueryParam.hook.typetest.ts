@@ -1,5 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable react-hooks/rules-of-hooks */
 import { expectTypeOf } from "expect-type";
 
 import { Optional } from "../../../../src/lib/helpers/commons";

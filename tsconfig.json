@@ -29,7 +29,7 @@
     "typeRoots" : [
       "./node_modules/@types/",
       "./typings/"
-    ],
+    ]
   },
   "exclude": [
     ".yarn/*",

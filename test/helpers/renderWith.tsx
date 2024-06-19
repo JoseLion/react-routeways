@@ -1,4 +1,4 @@
-import { render, RenderResult } from "@testing-library/react";
+import { RenderResult, render } from "@testing-library/react";
 import { ReactElement, ReactNode } from "react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 
@@ -16,7 +16,6 @@ interface RenderOptions {
 const { home, library } = TestRoutes;
 
 export function TestScreen({ title }: TestScreenProps): ReactElement {
-
   return (
     <div>
       <h1>{title}</h1>
@@ -40,7 +39,7 @@ export function renderWithNav(Element: ReactElement, options: RenderOptions = { 
         <Route path={home.template()} element={<TestScreen title="Home" />} />
 
         <Route path={library.template()} element={<TestScreen title="Library" />}>
-          <Route path={"/library/:libId/author/:authorId"} element={<TestScreen title="Author" />}>
+          <Route path="/library/:libId/author/:authorId" element={<TestScreen title="Author" />}>
             <Route path={library.author.book.template()} element={<TestScreen title="Book" />} />
           </Route>
         </Route>

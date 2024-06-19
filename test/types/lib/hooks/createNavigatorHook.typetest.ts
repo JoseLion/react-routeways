@@ -1,6 +1,3 @@
-/* eslint-disable @typescript-eslint/ban-ts-comment */
-/* eslint-disable @typescript-eslint/unbound-method */
-/* eslint-disable react-hooks/rules-of-hooks */
 import { expectTypeOf } from "expect-type";
 
 import { createNavigatorHook } from "../../../../src/lib/hooks/createNavigatorHook";
