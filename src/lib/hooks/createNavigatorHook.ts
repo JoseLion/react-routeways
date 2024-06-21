@@ -33,7 +33,6 @@ export type NavigateMethods<V extends CodecMap, Q extends CodecMap> =
  * routes structure.
  *
  * @param routes the custom `Routeways` routes
- * @param getNavigate a function or hook that provideds a navigation function
  * @returns a navigation hook of the custom `Routeways` routes
  */
 export function createNavigatorHook<T extends Record<string, Routeway>>(routes: T): () => NavigatorHook<T> {
