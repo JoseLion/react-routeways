@@ -1,16 +1,16 @@
-import { Children, Fragment, ReactElement, ReactNode, isValidElement } from "react";
+import { Children, Fragment, type ReactElement, type ReactNode, isValidElement } from "react";
 import {
-  IndexRouteObject,
-  LazyRouteFunction,
-  NonIndexRouteObject,
+  type IndexRouteObject,
+  type LazyRouteFunction,
+  type NonIndexRouteObject,
   Route as OriginalRoute,
   Routes as OriginalRoutes,
-  RoutesProps as OriginalRoutesProps,
+  type RoutesProps as OriginalRoutesProps,
 } from "react-router-dom";
 
-import { Nullable } from "../helpers/commons";
+import { Route, type RouteProps } from "./Route.component";
 
-import { Route, RouteProps } from "./Route.component";
+import type { Nullable } from "../helpers/commons";
 
 export interface RoutesProps extends OriginalRoutesProps {
   /**

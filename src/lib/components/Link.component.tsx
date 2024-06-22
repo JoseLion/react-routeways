@@ -1,6 +1,7 @@
-import { ReactElement, useMemo } from "react";
-import { Link as OriginalLink, LinkProps as OriginalLinkProps } from "react-router-dom";
-import { CodecMap, PathLike, Routeway } from "ts-routeways";
+import { type ReactElement, useMemo } from "react";
+import { Link as OriginalLink, type LinkProps as OriginalLinkProps } from "react-router-dom";
+
+import type { CodecMap, PathLike, Routeway } from "ts-routeways";
 
 export interface BaseLinkProps<T extends Routeway> {
   /**

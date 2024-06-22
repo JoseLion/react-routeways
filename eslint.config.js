@@ -127,8 +127,8 @@ export default eslintTs.config(
       "@stylistic/switch-colon-spacing": "error",
       "@typescript-eslint/ban-types": "error",
       "@typescript-eslint/consistent-type-assertions": "error",
-      "@typescript-eslint/consistent-type-exports": "off",
-      "@typescript-eslint/consistent-type-imports": ["off", { fixStyle: "inline-type-imports" }],
+      "@typescript-eslint/consistent-type-exports": "error",
+      "@typescript-eslint/consistent-type-imports": ["error", { fixStyle: "inline-type-imports" }],
       "@typescript-eslint/dot-notation": "error",
       "@typescript-eslint/explicit-function-return-type": ["error", { allowExpressions: true }],
       "@typescript-eslint/explicit-member-accessibility": "error",
@@ -279,13 +279,6 @@ export default eslintTs.config(
     rules: {
       "@typescript-eslint/no-non-null-assertion": "off",
       "@typescript-eslint/restrict-template-expressions": "off",
-      "etc/throw-error": "off",
-    },
-  },
-  {
-    files: ["**/*.typetest.ts?(x)"],
-    rules: {
-      "@typescript-eslint/ban-ts-comment": ["error", { "ts-expect-error": false }],
       "etc/throw-error": "off",
     },
   },

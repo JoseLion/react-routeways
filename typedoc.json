@@ -1,7 +1,7 @@
 {
   "$schema": "https://typedoc.org/schema.json",
   "cleanOutputDir": true,
-  "entryPoints": ["src"],
+  "entryPoints": ["./src/main.ts"],
   "entryPointStrategy": "expand",
   "gitRevision": "release",
   "githubPages": false,
@@ -10,7 +10,7 @@
   "mergeModulesMergeMode": "project",
   "mergeModulesRenameDefaults": true,
   "name": "React Routeways - API Reference",
-  "out": "docs/build",
+  "out": "./docs/build",
   "plugin": [
     "typedoc-plugin-markdown",
     "typedoc-plugin-merge-modules"

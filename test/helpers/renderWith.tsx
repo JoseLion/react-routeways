@@ -1,8 +1,9 @@
-import { RenderResult, render } from "@testing-library/react";
-import { ReactElement, ReactNode } from "react";
+import { type RenderResult, render } from "@testing-library/react";
 import { BrowserRouter, Outlet, Route, Routes } from "react-router-dom";
 
 import { TestRoutes } from "./routes";
+
+import type { ReactElement, ReactNode } from "react";
 
 interface TestScreenProps {
   title: string;

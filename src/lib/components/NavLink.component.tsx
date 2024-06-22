@@ -1,6 +1,7 @@
-import { ReactElement, useMemo } from "react";
-import { NavLink as OriginalNavLink, NavLinkProps as OriginalNavLinkProps } from "react-router-dom";
-import { CodecMap, PathLike, Routeway } from "ts-routeways";
+import { type ReactElement, useMemo } from "react";
+import { NavLink as OriginalNavLink, type NavLinkProps as OriginalNavLinkProps } from "react-router-dom";
+
+import type { CodecMap, PathLike, Routeway } from "ts-routeways";
 
 export interface BaseNavLinkProps<T extends Routeway> {
   /**

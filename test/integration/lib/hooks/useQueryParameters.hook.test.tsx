@@ -1,13 +1,14 @@
 import { expect } from "@assertive-ts/core";
 import { waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { ReactElement, useCallback } from "react";
+import { type ReactElement, useCallback } from "react";
+import { describe, expectTypeOf, it, suite } from "vitest";
 
-import { useQueryParameters } from "../../../../src/lib/hooks/useQueryParameters.hook";
+import { type UseQueryParameters, useQueryParameters } from "../../../../src/lib/hooks/useQueryParameters.hook";
 import { renderWithRouter } from "../../../helpers/renderWith";
 import { TestRoutes } from "../../../helpers/routes";
 
-const { library } = TestRoutes;
+const { home, library } = TestRoutes;
 
 function TestComp(): ReactElement {
   const [queryParams, setQueryParams] = useQueryParameters(library);
@@ -48,8 +49,8 @@ function Inner(): ReactElement {
   );
 }
 
-describe("[Integration] useQueryParameters.hook.test.tsx", () => {
-  context("when the query params state is used", () => {
+suite("[Integration] useQueryParameters.hook.test.tsx", () => {
+  describe("when the query params state is used", () => {
     it("parses the url to get the values", async () => {
       const url = library.makeUrl({ libId: 1, page: 3, search: "foo" });
       const { getByRole } = renderWithRouter(<TestComp />, { url });
@@ -61,7 +62,7 @@ describe("[Integration] useQueryParameters.hook.test.tsx", () => {
     });
   });
 
-  context("when the query params are changed", () => {
+  describe("when the query params are changed", () => {
     it("updates all states and the url", async () => {
       const url = library.makeUrl({ libId: 1, page: 3, search: "foo" });
       const { getByRole } = renderWithRouter(<TestComp />, { url });
@@ -88,7 +89,7 @@ describe("[Integration] useQueryParameters.hook.test.tsx", () => {
     });
   });
 
-  context("when the query params are update from an inner component", () => {
+  describe("when the query params are update from an inner component", () => {
     it("updates all states and the url", async () => {
       const url = library.makeUrl({ libId: 1, page: 3, search: "foo" });
       const { getByRole } = renderWithRouter(<TestComp />, { url });
@@ -113,5 +114,18 @@ describe("[Integration] useQueryParameters.hook.test.tsx", () => {
 
       expect(window.location.search).toBeEqual("?page=1&search=other");
     });
+  });
+
+  it.fails("defines the proper types", () => {
+    expectTypeOf(useQueryParameters(home)).toEqualTypeOf<UseQueryParameters<Record<never, never>>>();
+    expectTypeOf(useQueryParameters(library)).toEqualTypeOf<UseQueryParameters<{
+      page?: number;
+      search?: string;
+    }>>();
+
+    expectTypeOf(useQueryParameters(library)).not.toEqualTypeOf<UseQueryParameters<{
+      foo?: boolean;
+      other?: string;
+    }>>();
   });
 });

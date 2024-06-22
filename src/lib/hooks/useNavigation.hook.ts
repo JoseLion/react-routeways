@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { Routeway } from "ts-routeways";
+
+import type { Routeway } from "ts-routeways";
 
 export interface Navigation {
   /**

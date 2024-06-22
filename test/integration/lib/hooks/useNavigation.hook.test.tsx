@@ -1,8 +1,9 @@
 import { expect } from "@assertive-ts/core";
 import { renderHook, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { ReactElement, useCallback } from "react";
+import { type ReactElement, useCallback } from "react";
 import { BrowserRouter } from "react-router-dom";
+import { describe, expectTypeOf, it, suite } from "vitest";
 
 import { safeKeys } from "../../../../src/lib/helpers/commons";
 import { useNavigation } from "../../../../src/lib/hooks/useNavigation.hook";
@@ -41,7 +42,7 @@ function NavComponent(): ReactElement {
   );
 }
 
-describe("[Integration] useNavigation.hook.test.tsx", () => {
+suite("[Integration] useNavigation.hook.test.tsx", () => {
   it("creates a Navigation object", () => {
     const { result } = renderHook(useNavigation, { wrapper: BrowserRouter });
 
@@ -51,7 +52,7 @@ describe("[Integration] useNavigation.hook.test.tsx", () => {
     });
   });
 
-  context("when the goTo function is called", () => {
+  describe("when the goTo function is called", () => {
     it("returns a callback that pushes another location to the history", async () => {
       const { getByRole, findByText } = renderWithNav(<NavComponent />);
 
@@ -69,7 +70,7 @@ describe("[Integration] useNavigation.hook.test.tsx", () => {
     });
   });
 
-  context("when the navigate function is called", () => {
+  describe("when the navigate function is called", () => {
     it("pushes another location to the history", async () => {
       const { getByRole, findByText } = renderWithNav(<NavComponent />);
 
@@ -87,7 +88,7 @@ describe("[Integration] useNavigation.hook.test.tsx", () => {
     });
   });
 
-  context("when the reset function is called", () => {
+  describe("when the reset function is called", () => {
     it("resets the history to the route's location", async () => {
       const { getByRole, findByText, queryByRole } = renderWithNav(<NavComponent />);
 
@@ -107,7 +108,7 @@ describe("[Integration] useNavigation.hook.test.tsx", () => {
     });
   });
 
-  context("when the resetTo funciton is called", () => {
+  describe("when the resetTo funciton is called", () => {
     it("returns a callback that resets the history to the route's location", async () => {
       const { getByRole, findByText, queryByRole } = renderWithNav(<NavComponent />);
 
@@ -125,5 +126,53 @@ describe("[Integration] useNavigation.hook.test.tsx", () => {
 
       expect(queryByRole("heading", { level: 1, name: "Home" })).toBeNull();
     });
+  });
+
+  it.fails("defines the proper routes", () => {
+    const { goTo, navigate, reset, resetTo } = useNavigation();
+
+    expectTypeOf(goTo(home)).toEqualTypeOf<() => void>();
+    expectTypeOf(goTo(library, { libId: 1 })).toEqualTypeOf<() => void>();
+    expectTypeOf(goTo(library.author, { authorId: 1, libId: 1 })).toEqualTypeOf<() => void>();
+    expectTypeOf(goTo(library.author.book, { authorId: 1, bookId: 1, libId: 1 })).toEqualTypeOf<() => void>();
+    // @ts-expect-error missing params arg
+    expectTypeOf(goTo(library)).toEqualTypeOf<() => void>();
+    // @ts-expect-error missing param
+    expectTypeOf(goTo(library.author, { libId: 1 })).toEqualTypeOf<() => void>();
+    // @ts-expect-error missing nested param
+    expectTypeOf(goTo(library.author.book, { authorId: 1, libId: 1 })).toEqualTypeOf<() => void>();
+
+    expectTypeOf(navigate(home)).toBeVoid();
+    expectTypeOf(navigate(library, { libId: 1 })).toBeVoid();
+    expectTypeOf(navigate(library.author, { authorId: 1, libId: 1 })).toBeVoid();
+    expectTypeOf(navigate(library.author.book, { authorId: 1, bookId: 1, libId: 1 })).toBeVoid();
+    // @ts-expect-error missing params arg
+    expectTypeOf(navigate(library)).toBeVoid();
+    // @ts-expect-error missing param
+    expectTypeOf(navigate(library.author, { libId: 1 })).toBeVoid();
+    // @ts-expect-error missing nested param
+    expectTypeOf(navigate(library.author.book, { authorId: 1, libId: 1 })).toBeVoid();
+
+    expectTypeOf(reset(home)).toBeVoid();
+    expectTypeOf(reset(library, { libId: 1 })).toBeVoid();
+    expectTypeOf(reset(library.author, { authorId: 1, libId: 1 })).toBeVoid();
+    expectTypeOf(reset(library.author.book, { authorId: 1, bookId: 1, libId: 1 })).toBeVoid();
+    // @ts-expect-error missing params arg
+    expectTypeOf(reset(library)).toBeVoid();
+    // @ts-expect-error missing param
+    expectTypeOf(reset(library.author, { libId: 1 })).toBeVoid();
+    // @ts-expect-error missing nested param
+    expectTypeOf(reset(library.author.book, { authorId: 1, libId: 1 })).toBeVoid();
+
+    expectTypeOf(resetTo(home)).toEqualTypeOf<() => void>();
+    expectTypeOf(resetTo(library, { libId: 1 })).toEqualTypeOf<() => void>();
+    expectTypeOf(resetTo(library.author, { authorId: 1, libId: 1 })).toEqualTypeOf<() => void>();
+    expectTypeOf(resetTo(library.author.book, { authorId: 1, bookId: 1, libId: 1 })).toEqualTypeOf<() => void>();
+    // @ts-expect-error missing params arg
+    expectTypeOf(resetTo(library)).toEqualTypeOf<() => void>();
+    // @ts-expect-error missing param
+    expectTypeOf(resetTo(library.author, { libId: 1 })).toEqualTypeOf<() => void>();
+    // @ts-expect-error missing nested param
+    expectTypeOf(resetTo(library.author.book, { authorId: 1, libId: 1 })).toEqualTypeOf<() => void>();
   });
 });
