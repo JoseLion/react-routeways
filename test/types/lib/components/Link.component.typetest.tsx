@@ -1,10 +1,11 @@
 import { expectTypeOf } from "expect-type";
-import { JSX } from "react";
-import { LinkProps as OriginalLinkProps } from "react-router-dom";
-import { Routeway } from "ts-routeways";
 
-import { Link, LinkProps } from "../../../../src/lib/components/Link.component";
+import { Link, type LinkProps } from "../../../../src/lib/components/Link.component";
 import { TestRoutes } from "../../../helpers/routes";
+
+import type { JSX } from "react";
+import type { LinkProps as OriginalLinkProps } from "react-router-dom";
+import type { Routeway } from "ts-routeways";
 
 const { home, library } = TestRoutes;
 

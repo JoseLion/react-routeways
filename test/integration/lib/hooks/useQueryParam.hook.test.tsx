@@ -1,7 +1,7 @@
 import { expect } from "@assertive-ts/core";
 import { waitFor } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
-import { ReactElement, useCallback } from "react";
+import { type ReactElement, useCallback } from "react";
 
 import { useQueryParam } from "../../../../src/lib/hooks/useQueryParam.hook";
 import { renderWithRouter } from "../../../helpers/renderWith";

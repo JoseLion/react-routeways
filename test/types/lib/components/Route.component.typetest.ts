@@ -1,8 +1,9 @@
 import { expectTypeOf } from "expect-type";
-import { Routeway } from "ts-routeways";
 
 import { Route } from "../../../../src/lib/components/Route.component";
-import { Optional } from "../../../../src/lib/helpers/commons";
+
+import type { Optional } from "../../../../src/lib/helpers/commons";
+import type { Routeway } from "ts-routeways";
 
 expectTypeOf(Route)
   .parameter(0)

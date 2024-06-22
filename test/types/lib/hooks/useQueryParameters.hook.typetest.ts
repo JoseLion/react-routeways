@@ -1,6 +1,6 @@
 import { expectTypeOf } from "expect-type";
 
-import { UseQueryParameters, useQueryParameters } from "../../../../src/lib/hooks/useQueryParameters.hook";
+import { type UseQueryParameters, useQueryParameters } from "../../../../src/lib/hooks/useQueryParameters.hook";
 import { TestRoutes } from "../../../helpers/routes";
 
 const { home, library } = TestRoutes;

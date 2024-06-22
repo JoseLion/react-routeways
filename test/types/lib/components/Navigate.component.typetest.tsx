@@ -1,10 +1,11 @@
 import { expectTypeOf } from "expect-type";
-import { JSX } from "react";
-import { NavigateProps as OriginalnavigateProps } from "react-router-dom";
-import { Routeway } from "ts-routeways";
 
-import { Navigate, NavigateProps } from "../../../../src/lib/components/Navigate.component";
+import { Navigate, type NavigateProps } from "../../../../src/lib/components/Navigate.component";
 import { TestRoutes } from "../../../helpers/routes";
+
+import type { JSX } from "react";
+import type { NavigateProps as OriginalnavigateProps } from "react-router-dom";
+import type { Routeway } from "ts-routeways";
 
 const { home, library } = TestRoutes;
 

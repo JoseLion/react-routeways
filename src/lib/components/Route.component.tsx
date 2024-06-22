@@ -1,8 +1,8 @@
-import { ReactElement, ReactNode } from "react";
-import { Route as OriginalRoute, RouteProps as OriginalRouteProps } from "react-router-dom";
-import { Routeway } from "ts-routeways";
+import { Route as OriginalRoute, type RouteProps as OriginalRouteProps } from "react-router-dom";
 
-import { Nullable } from "../helpers/commons";
+import type { Nullable } from "../helpers/commons";
+import type { ReactElement, ReactNode } from "react";
+import type { Routeway } from "ts-routeways";
 
 export interface RouteProps extends Omit<OriginalRouteProps, "path"> {
   /**

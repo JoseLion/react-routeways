@@ -1,8 +1,9 @@
-import { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState } from "react";
+import { type Dispatch, type SetStateAction, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { Routeway } from "ts-routeways";
 
 import { isFunctionAction } from "../helpers/commons";
+
+import type { Routeway } from "ts-routeways";
 
 export type UseQueryParameters<Q extends Record<string, unknown>> = [
   Partial<Q>,

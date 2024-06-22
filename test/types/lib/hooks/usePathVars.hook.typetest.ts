@@ -1,6 +1,6 @@
 import { expectTypeOf } from "expect-type";
 
-import { UsePathVars, usePathVars } from "../../../../src/lib/hooks/usePathVars.hook";
+import { type UsePathVars, usePathVars } from "../../../../src/lib/hooks/usePathVars.hook";
 import { TestRoutes } from "../../../helpers/routes";
 
 const { home, library } = TestRoutes;

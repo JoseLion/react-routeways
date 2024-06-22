@@ -1,10 +1,11 @@
 import { expectTypeOf } from "expect-type";
-import { JSX } from "react";
-import { NavLinkProps as OriginalNavLinkProps } from "react-router-dom";
-import { Routeway } from "ts-routeways";
 
-import { NavLink, NavLinkProps } from "../../../../src/lib/components/NavLink.component";
+import { NavLink, type NavLinkProps } from "../../../../src/lib/components/NavLink.component";
 import { TestRoutes } from "../../../helpers/routes";
+
+import type { JSX } from "react";
+import type { NavLinkProps as OriginalNavLinkProps } from "react-router-dom";
+import type { Routeway } from "ts-routeways";
 
 const { home, library } = TestRoutes;
 

@@ -1,8 +1,9 @@
 import { expectTypeOf } from "expect-type";
-import { Codec, CodecMap, RouteParams } from "ts-routeways";
 
-import { UseRouteParams, useRouteParams } from "../../../../src/lib/hooks/useRouteParams.hook";
+import { type UseRouteParams, useRouteParams } from "../../../../src/lib/hooks/useRouteParams.hook";
 import { TestRoutes } from "../../../helpers/routes";
+
+import type { Codec, CodecMap, RouteParams } from "ts-routeways";
 
 const { home, library } = TestRoutes;
 

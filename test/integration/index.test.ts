@@ -1,7 +1,7 @@
 import { expect } from "@assertive-ts/core";
 
 // eslint-disable-next-line import/no-namespace
-import * as reactRouteways from "../../src/index";
+import * as reactRouteways from "../../src/main";
 
 describe("[Integration] index.test.ts", () => {
   it("re-exports the library exports", () => {

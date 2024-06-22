@@ -1,10 +1,11 @@
-import { Dispatch, SetStateAction, useCallback, useMemo } from "react";
-import { Routeway } from "ts-routeways";
+import { type Dispatch, type SetStateAction, useCallback, useMemo } from "react";
 
-import { NonOptional, isFunctionAction } from "../helpers/commons";
+import { type NonOptional, isFunctionAction } from "../helpers/commons";
 
 import { usePathVars } from "./usePathVars.hook";
 import { useQueryParameters } from "./useQueryParameters.hook";
+
+import type { Routeway } from "ts-routeways";
 
 export type UseRouteParams<T extends Record<string, unknown>> = [
   T,

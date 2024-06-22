@@ -1,5 +1,4 @@
 import { expectTypeOf } from "expect-type";
-import { CodecMap, Routeway } from "ts-routeways";
 
 import type {
   LinkProps,
@@ -14,7 +13,8 @@ import type {
   UseQueryParam,
   UseQueryParameters,
   UseRouteParams,
-} from "../../src/index";
+} from "../../src/main";
+import type { CodecMap, Routeway } from "ts-routeways";
 
 expectTypeOf<NavigateMethods<CodecMap, CodecMap>>().not.toBeAny();
 expectTypeOf<NavigateOptions<unknown>>().not.toBeAny();

@@ -1,8 +1,9 @@
-import { Dispatch, SetStateAction, useCallback, useEffect, useMemo, useState } from "react";
+import { type Dispatch, type SetStateAction, useCallback, useEffect, useMemo, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { CodecMap, CodecsToRecord, PathLike, Routeway } from "ts-routeways";
 
-import { NonOptional, Optional, isFunctionAction } from "../helpers/commons";
+import { type NonOptional, type Optional, isFunctionAction } from "../helpers/commons";
+
+import type { CodecMap, CodecsToRecord, PathLike, Routeway } from "ts-routeways";
 
 export type UseQueryParam<T> = [T, Dispatch<SetStateAction<T>>];
 

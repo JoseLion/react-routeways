@@ -1,8 +1,9 @@
 import { useCallback, useMemo } from "react";
 import { useNavigate } from "react-router-dom";
-import { CodecMap, PathLike, RouteParams, Routeway } from "ts-routeways";
 
 import { safeKeys } from "../helpers/commons";
+
+import type { CodecMap, PathLike, RouteParams, Routeway } from "ts-routeways";
 
 export type NavigatorHook<T extends Record<string, Routeway>> = {
   [K in keyof T]: T[K] extends Routeway<PathLike, infer V, infer Q, infer S>
