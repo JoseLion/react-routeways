@@ -1,5 +1,6 @@
-import jsdomGlobal from "jsdom-global";
+import { cleanup } from "@testing-library/react";
+import { afterEach } from "vitest";
 
-jsdomGlobal(undefined, { url: "http://localhost" });
-
-global.MutationObserver = window.MutationObserver;
+afterEach(() => {
+  cleanup();
+});

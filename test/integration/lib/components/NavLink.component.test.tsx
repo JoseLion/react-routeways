@@ -1,11 +1,14 @@
 import { waitFor } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
+import { expectTypeOf, it, suite } from "vitest";
 
-import { NavLink } from "../../../../src/lib/components/NavLink.component";
+import { NavLink, type NavLinkProps } from "../../../../src/lib/components/NavLink.component";
 import { renderWithNav } from "../../../helpers/renderWith";
 import { TestRoutes } from "../../../helpers/routes";
 
-import type { ReactElement } from "react";
+import type { JSX, ReactElement } from "react";
+import type { NavLinkProps as OriginalNavLinkProps } from "react-router-dom";
+import type { Routeway } from "ts-routeways";
 
 const { home, library } = TestRoutes;
 
@@ -20,7 +23,7 @@ function TestNav(): ReactElement {
   );
 }
 
-describe("[Integration] NavLink.component.test.tsx", () => {
+suite("[Integration] NavLink.component.test.tsx", () => {
   it("navigates to the route's url", async () => {
     const { getByRole, getByText } = renderWithNav(<TestNav />);
 
@@ -41,5 +44,37 @@ describe("[Integration] NavLink.component.test.tsx", () => {
     await userEvent.click(getByText("Go Home"));
 
     await waitFor(() => getByRole("heading", { level: 1, name: "Home" }));
+  });
+
+  it("defines the proper types", () => {
+    expectTypeOf<Omit<NavLinkProps<Routeway>, "to">>().toMatchTypeOf<Omit<OriginalNavLinkProps, "to">>();
+
+    expectTypeOf(<NavLink to={home}>{"..."}</NavLink>).toEqualTypeOf<JSX.Element>();
+    expectTypeOf(<NavLink to={library} params={{ libId: 1, page: 1 }}>{"..."}</NavLink>).toEqualTypeOf<JSX.Element>();
+    expectTypeOf(
+      <NavLink
+        to={library.author}
+        params={{ authorId: 1, libId: 1 }}
+      >
+        {"..."}
+      </NavLink>,
+    )
+    .toEqualTypeOf<JSX.Element>();
+    expectTypeOf(
+      <NavLink
+        to={library.author.book}
+        params={{ authorId: 1, bookId: 1, libId: 1 }}
+      >
+        {"..."}
+      </NavLink>,
+    )
+    .toEqualTypeOf<JSX.Element>();
+
+    // @ts-expect-error missing params
+    expectTypeOf(<NavLink to={library} />).toEqualTypeOf<JSX.Element>();
+    // @ts-expect-error wrong params
+    expectTypeOf(<NavLink to={library.author} params={{ libId: 1 }} />).toEqualTypeOf<JSX.Element>();
+    // @ts-expect-error wrong nested params
+    expectTypeOf(<NavLink to={library.author.book} params={{ authorId: 1, libId: 1 }} />).toEqualTypeOf<JSX.Element>();
   });
 });

@@ -2,12 +2,13 @@ import { expect } from "@assertive-ts/core";
 import { waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { type ReactElement, useCallback } from "react";
+import { describe, expectTypeOf, it, suite } from "vitest";
 
-import { usePathVars } from "../../../../src/lib/hooks/usePathVars.hook";
+import { type UsePathVars, usePathVars } from "../../../../src/lib/hooks/usePathVars.hook";
 import { renderWithRouter } from "../../../helpers/renderWith";
 import { TestRoutes } from "../../../helpers/routes";
 
-const { library } = TestRoutes;
+const { home, library } = TestRoutes;
 
 function TestComp(): ReactElement {
   const [pathVars, setPathVars] = usePathVars(library.author.book);
@@ -27,8 +28,8 @@ function TestComp(): ReactElement {
   );
 }
 
-describe("[Integration] usePathVars.hook.test.ts", () => {
-  context("when path var state is used", () => {
+suite("[Integration] usePathVars.hook.test.ts", () => {
+  describe("when path var state is used", () => {
     it("parses the url to get the values", async () => {
       const url = library.author.book.makeUrl({ authorId: 1, bookId: 2, libId: 3 });
       const { getByRole } = renderWithRouter(<TestComp />, { url });
@@ -41,7 +42,7 @@ describe("[Integration] usePathVars.hook.test.ts", () => {
     });
   });
 
-  context("when a path variable is changed", () => {
+  describe("when a path variable is changed", () => {
     it("updates it state and navigates to the new url", async () => {
       const url = library.author.book.makeUrl({ authorId: 1, bookId: 2, libId: 3 });
       const { getByRole } = renderWithRouter(<TestComp />, { url });
@@ -62,5 +63,24 @@ describe("[Integration] usePathVars.hook.test.ts", () => {
 
       expect(window.location.pathname).toBeEqual("/library/3/author/1/book/5");
     });
+  });
+
+  it.fails("defines the proper types", () => {
+    expectTypeOf(usePathVars(home)).toEqualTypeOf<UsePathVars<Record<never, never>>>();
+    expectTypeOf(usePathVars(library)).toEqualTypeOf<UsePathVars<{ libId: number; }>>();
+    expectTypeOf(usePathVars(library.author)).toEqualTypeOf<UsePathVars<{
+      authorId: number;
+      libId: number;
+    }>>();
+    expectTypeOf(usePathVars(library.author.book)).toEqualTypeOf<UsePathVars<{
+      authorId: number;
+      bookId: number;
+      libId: number;
+    }>>();
+
+    expectTypeOf(usePathVars(home)).not.toEqualTypeOf<UsePathVars<{ x: number; }>>();
+    expectTypeOf(usePathVars(library)).not.toEqualTypeOf<UsePathVars<Record<never, never>>>();
+    expectTypeOf(usePathVars(library.author)).not.toEqualTypeOf<UsePathVars<{ libId: number; }>>();
+    expectTypeOf(usePathVars(library)).not.toEqualTypeOf<UsePathVars<{ authorId: number; libId: number; }>>();
   });
 });

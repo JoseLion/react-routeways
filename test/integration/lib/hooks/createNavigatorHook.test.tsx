@@ -3,6 +3,7 @@ import { renderHook, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { type ReactElement, useCallback } from "react";
 import { BrowserRouter } from "react-router-dom";
+import { describe, expectTypeOf, it, suite } from "vitest";
 
 import { createNavigatorHook } from "../../../../src/lib/hooks/createNavigatorHook";
 import { renderWithNav } from "../../../helpers/renderWith";
@@ -38,8 +39,8 @@ function NavComponent(): ReactElement {
   );
 }
 
-describe("[Integration] createNavigatiorHook.test.tsx", () => {
-  context("when the created hook is used", () => {
+suite("[Integration] createNavigatiorHook.test.tsx", () => {
+  describe("when the created hook is used", () => {
     it("returns a navigator with the passed route structure", () => {
       const { result } = renderHook(useNavigator, { wrapper: BrowserRouter });
 
@@ -58,7 +59,7 @@ describe("[Integration] createNavigatiorHook.test.tsx", () => {
     });
   });
 
-  context("when the navigate function is called", () => {
+  describe("when the navigate function is called", () => {
     it("pushes another location to the history", async () => {
       const { getByRole, findByText } = renderWithNav(<NavComponent />);
 
@@ -76,7 +77,7 @@ describe("[Integration] createNavigatiorHook.test.tsx", () => {
     });
   });
 
-  context("when the replace function is called", () => {
+  describe("when the replace function is called", () => {
     it("resets the history with the route's location", async () => {
       const { getByRole, findByText, queryByRole } = renderWithNav(<NavComponent />);
 
@@ -94,5 +95,47 @@ describe("[Integration] createNavigatiorHook.test.tsx", () => {
 
       expect(queryByRole("heading", { level: 1, name: "Home" })).toBeNull();
     });
+  });
+
+  it("defines the proper types", () => {
+    const { result } = renderHook(useNavigator, { wrapper: BrowserRouter });
+    const { home, library } = result.current;
+
+    expectTypeOf(useNavigator).toBeFunction();
+    expectTypeOf(home).toMatchTypeOf<{
+      navigate: () => void;
+      reset: () => void;
+    }>();
+
+    expectTypeOf(library).toMatchTypeOf<{
+      author: {
+        book: {
+          navigate: (params: { authorId: number; bookId: number; libId: number; }) => void;
+          reset: (params: { authorId: number; bookId: number; libId: number; }) => void;
+        };
+        navigate: (params: { authorId: number; libId: number; }) => void;
+        reset: (params: { authorId: number; libId: number; }) => void;
+      };
+      navigate: (params: { libId: number; }) => void;
+      reset: (params: { libId: number; }) => void;
+    }>();
+
+    // @ts-expect-error missing route
+    expectTypeOf(library).toMatchTypeOf<{
+      navigate: () => void;
+      reset: () => void;
+    }>();
+
+    // @ts-expect-error missing nested route
+    expectTypeOf(library.author).toMatchTypeOf<{
+      navigate: (params: { libId: number; }) => void;
+      reset: (params: { libId: number; }) => void;
+    }>();
+
+    // @ts-expect-error missing deep route
+    expectTypeOf(library.author.book).toMatchTypeOf<{
+      navigate: (params: { bookId: number; libId: number; }) => void;
+      reset: (params: { bookId: number; libId: number; }) => void;
+    }>();
   });
 });

@@ -1,16 +1,20 @@
 import { render, waitFor } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import { BrowserRouter, Link as RRLink } from "react-router-dom";
+import { BrowserRouter, type RoutesProps as OriginalRoutesProps, Link as RRLink } from "react-router-dom";
+import { expectTypeOf, it, suite } from "vitest";
 
 import { Link } from "../../../../src/lib/components/Link.component";
-import { Route } from "../../../../src/lib/components/Route.component";
-import { Routes } from "../../../../src/lib/components/Routes.component";
+import { Route, type RouteProps } from "../../../../src/lib/components/Route.component";
+import { Routes, type RoutesProps } from "../../../../src/lib/components/Routes.component";
 import { TestScreen } from "../../../helpers/renderWith";
 import { TestRoutes } from "../../../helpers/routes";
 
+import type { Nullable } from "../../../../src/lib/helpers/commons";
+import type { ReactElement, ReactNode } from "react";
+
 const { home, library } = TestRoutes;
 
-describe("[Integration] Routes.component.test.tsx", () => {
+suite("[Integration] Routes.component.test.tsx", () => {
   it("creates a Route and passing the template to the path", async () => {
     window.history.pushState({ }, "", "/");
 
@@ -83,5 +87,15 @@ describe("[Integration] Routes.component.test.tsx", () => {
     await userEvent.click(getByText("Go Book"));
 
     await waitFor(() => getByRole("heading", { level: 1, name: "Book" }));
+  });
+
+  it("defines the proper types", () => {
+    expectTypeOf(Routes).toEqualTypeOf<(props: RoutesProps) => Nullable<ReactElement>>();
+    expectTypeOf(Routes)
+      .parameter(0)
+      .toMatchTypeOf<{ children: ReactElement<RouteProps> | ReactElement<RouteProps>[] | ReactNode; }>();
+    expectTypeOf(Routes)
+      .parameter(0)
+      .not.toEqualTypeOf<OriginalRoutesProps>();
   });
 });

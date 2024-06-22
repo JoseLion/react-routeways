@@ -2,12 +2,15 @@ import { expect } from "@assertive-ts/core";
 import { waitFor } from "@testing-library/dom";
 import userEvent from "@testing-library/user-event";
 import { type ReactElement, useCallback } from "react";
+import { describe, expectTypeOf, it, suite } from "vitest";
 
-import { useQueryParam } from "../../../../src/lib/hooks/useQueryParam.hook";
+import { type UseQueryParam, useQueryParam } from "../../../../src/lib/hooks/useQueryParam.hook";
 import { renderWithRouter } from "../../../helpers/renderWith";
 import { TestRoutes } from "../../../helpers/routes";
 
-const { library } = TestRoutes;
+import type { Optional } from "../../../../src/lib/helpers/commons";
+
+const { home, library } = TestRoutes;
 
 function TestComp(): ReactElement {
   const [page, setPage] = useQueryParam(library, "page", 1);
@@ -58,9 +61,9 @@ function Inner(): ReactElement {
   );
 }
 
-describe("[Integration] useQueryParam.hook.test.tsx", () => {
-  context("when the query param state is used", () => {
-    context("and the query param exists in the url", () => {
+suite("[Integration] useQueryParam.hook.test.tsx", () => {
+  describe("when the query param state is used", () => {
+    describe("and the query param exists in the url", () => {
       it("parses the url to get the value", async () => {
         const url = library.makeUrl({ libId: 1, page: 3 });
         const { getByRole } = renderWithRouter(<TestComp />, { url });
@@ -69,8 +72,8 @@ describe("[Integration] useQueryParam.hook.test.tsx", () => {
       });
     });
 
-    context("and the query param does not exist in the url", () => {
-      context("and a fallback is not provided", () => {
+    describe("and the query param does not exist in the url", () => {
+      describe("and a fallback is not provided", () => {
         it("leaves the value as undefined", async () => {
           const url = library.makeUrl({ libId: 1 });
           const { getByRole } = renderWithRouter(<TestComp />, { url });
@@ -79,7 +82,7 @@ describe("[Integration] useQueryParam.hook.test.tsx", () => {
         });
       });
 
-      context("and a fallback is provided", () => {
+      describe("and a fallback is provided", () => {
         it("initilizes the value with the fallback", async () => {
           const url = library.makeUrl({ libId: 1 });
           const { getByRole } = renderWithRouter(<TestComp />, { url });
@@ -90,7 +93,7 @@ describe("[Integration] useQueryParam.hook.test.tsx", () => {
     });
   });
 
-  context("when the query param is changed", () => {
+  describe("when the query param is changed", () => {
     it("updates all query param states and the url", async () => {
       const url = library.makeUrl({ libId: 1 });
       const { getByRole } = renderWithRouter(<TestComp />, { url });
@@ -120,7 +123,7 @@ describe("[Integration] useQueryParam.hook.test.tsx", () => {
     });
   });
 
-  context("when the query param is changed from an inner component", () => {
+  describe("when the query param is changed from an inner component", () => {
     it("updates all query param states and the url", async () => {
       const url = library.makeUrl({ libId: 1, page: 3 });
       const { getByRole } = renderWithRouter(<TestComp />, { url });
@@ -141,7 +144,7 @@ describe("[Integration] useQueryParam.hook.test.tsx", () => {
     });
   });
 
-  context("when the query param is set to undefined", () => {
+  describe("when the query param is set to undefined", () => {
     it("changes the state to undefined and removes the query string", async () => {
       const url = library.makeUrl({ libId: 1 });
       const { getByRole, findByRole } = renderWithRouter(<TestComp />, { url });
@@ -160,5 +163,18 @@ describe("[Integration] useQueryParam.hook.test.tsx", () => {
 
       expect(window.location.search).toBeEmpty();
     });
+  });
+
+  it.fails("defines the proper types", () => {
+    expectTypeOf(useQueryParam(home, "foo")).toEqualTypeOf<UseQueryParam<Optional<unknown>>>();
+    expectTypeOf(useQueryParam(library, "page")).toEqualTypeOf<UseQueryParam<Optional<number>>>();
+    expectTypeOf(useQueryParam(library, "search")).toEqualTypeOf<UseQueryParam<Optional<string>>>();
+    expectTypeOf(useQueryParam(library, "page", 1)).toEqualTypeOf<UseQueryParam<number>>();
+    expectTypeOf(useQueryParam(library, "search", "foo")).toEqualTypeOf<UseQueryParam<string>>();
+
+    // @ts-expect-error wrong query param
+    expectTypeOf(useQueryParam(library, "foo")).toEqualTypeOf<UseQueryParam<Optional<unknown>>>();
+    // @ts-expect-error wrong value type
+    expectTypeOf(useQueryParam(library, "search", 1)).toEqualTypeOf<UseQueryParam<number>>();
   });
 });

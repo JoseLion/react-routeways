@@ -282,11 +282,4 @@ export default eslintTs.config(
       "etc/throw-error": "off",
     },
   },
-  {
-    files: ["**/*.typetest.ts?(x)"],
-    rules: {
-      "@typescript-eslint/ban-ts-comment": ["error", { "ts-expect-error": false }],
-      "etc/throw-error": "off",
-    },
-  },
 );
