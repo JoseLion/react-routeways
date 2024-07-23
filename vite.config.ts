@@ -6,9 +6,13 @@ export default defineConfig({
     lib: {
       entry: "./src/main.ts",
       fileName: "main",
-      formats: ["cjs", "es", "umd"],
-      name: "ReactRouteways",
+      formats: ["cjs", "es"],
     },
+    rollupOptions: {
+      output: { preserveModules: true },
+    },
+    sourcemap: true,
+    ssr: true,
   },
   plugins: [
     dts({
